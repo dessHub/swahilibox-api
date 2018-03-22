@@ -1,14 +1,19 @@
 import Mongoose from 'mongoose';
-import config from './config/config.dev'
+ import dotenv from 'dotenv';
+ 
+if (process.env.NODE_ENV !== 'production') {
+dotenv.load();
+}
 
 Mongoose.Promise = global.Promise;
 
-const connectToDb = async () => {
-    let dbHost = config.dbHost;
-    let dbPort = config.dbPort;
-    let dbName = config.dbName;
+const connectToDb = () => {
+    let dbHost = process.env.dbHost;
+    let dbPort = process.env.dbPort;
+    let dbName = process.env.dbName;
+    
     try {
-        await Mongoose.connect(`mongodb://${dbHost}:${dbPort}/${dbName}`, { useMongoClient: true });
+        Mongoose.connect(`mongodb://${dbHost}:${dbPort}/${dbName}`);
         console.log('Connected to mongo!!!');
     }
     catch (err) {
