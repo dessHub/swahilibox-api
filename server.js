@@ -8,6 +8,8 @@ import router from './routes/index';
 
 const app = express();
 
+connectToDb();
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
