@@ -24,7 +24,7 @@ var connectToDb = function connectToDb() {
     var dbHost = process.env.dbHost;
     var dbPort = process.env.dbPort;
     var dbName = process.env.dbName;
-    console.log(dbHost);
+
     try {
         _mongoose2.default.connect('mongodb://' + dbHost + ':' + dbPort + '/' + dbName);
         console.log('Connected to mongo!!!');

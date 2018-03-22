@@ -1,15 +1,14 @@
 import express from 'express';
 import User from '../models/user';
 const router = express.Router();
+import UserController from '../controllers/user';
 
 router.get('/', (req, res) => {
-   // console.log('Working');
-    User.find({}, (err, users)=> {
-  if (err) throw err;
-
-  // object of all the users
-  console.log(users);
+    UserController.index(req, res);
 });
+
+router.post('/adduser', (req, res) => {
+    UserController.addUser(req, res);
 });
 
 export default router;
