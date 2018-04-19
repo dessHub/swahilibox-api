@@ -1,16 +1,27 @@
 const express = require('express');
 const app     = express();
 const router  = express.Router();
-//const Event   = require('.../app/models/event');
-//const User    = require('../app/models/user');
-//const Ticket  = require('../app/models/ticket');
+const Event   = require('.../models/event');
+const User    = require('../models/user');
+const Ticket  = require('../models/ticket');
 
-app.use('/api', router);
-
-router.get('/events', (req, res) => {
+app.get('/events', (req, res) => {
     res.json({
         events: "events"
     });
 })
+  
+app.get('/events', (req, res, err) =>{
+  Event.find({}, (error, events) => {
+    if(error){
+        res.jsond({
+            status: "Error",
+            message: error
+        });
+    }else{
+    res.json(events);
+    }
+  });
+});
 
 module.exports = app;
