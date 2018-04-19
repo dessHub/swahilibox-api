@@ -26,7 +26,7 @@ module.exports = function(app, passport) {
         failureFlash : true // allow flash messages
     }));
 
-    app.get('faillogin', (req, res) => {
+    app.get('/faillogin', (req, res) => {
         res.json({
             status: "fail",
             message: req.flash('loginMessage')
