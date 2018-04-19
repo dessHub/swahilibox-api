@@ -28,7 +28,7 @@ module.exports = function(app, passport) {
 
     app.get('faillogin', (req, res) => {
         res.json({
-            success: false,
+            status: "fail",
             message: req.flash('loginMessage')
         })
     })
@@ -73,7 +73,8 @@ module.exports = function(app, passport) {
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/profile', isLoggedIn, function(req, res) {
         res.json({
-            user : req.user // get the user out of session and pass to template
+            status: "Success"
+             // get the user out of session and pass to template
         });
     });
 
