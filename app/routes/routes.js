@@ -28,9 +28,11 @@ module.exports = function(app, passport) {
 
     app.get('/faillogin', (req, res) => {
         res.json({
-            status: "fail",
-            message: req.flash('loginMessage')
-        })
+            response: {
+                status: "fail",
+                message: req.flash('loginMessage')
+                }
+            })
     })
     
     // =====================================
