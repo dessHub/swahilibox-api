@@ -63,6 +63,7 @@ module.exports = function(passport) {
 
                 // set the user's local credentials
                 newUser.local.email    = email;
+                newUser.local.role     = "Normal";
                 newUser.local.password = newUser.generateHash(password);
 
                 // save the user
@@ -119,7 +120,7 @@ module.exports = function(passport) {
     // =========================================================================
     // FACEBOOK ================================================================
     // =========================================================================
-    passport.use(new FacebookStrategy({
+   /* passport.use(new FacebookStrategy({
 
         // pull in our app id and secret from our auth.js file
         clientID        : configAuth.facebookAuth.clientID,
@@ -168,7 +169,7 @@ module.exports = function(passport) {
             });
         });
 
-    }));
+    }));*/
 
 };
     
