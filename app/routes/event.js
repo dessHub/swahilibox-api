@@ -18,9 +18,19 @@ app.post('/create-events', (req, res) => {
       event.description  =  req.body.description;
       event.start  =  req.body.start;;
       event.end  =  req.body.end;
+      event.banner = req.body.banner
       event.status = "Active";
       event.organiser = "Nodecircle";
-      event.save();
+      event.save((err, event) => {
+          if(err){
+              res.json(err);
+          } else {
+          res.json({
+              success: true,
+              event: event
+          });
+        }
+      });
     
   });
   

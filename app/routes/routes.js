@@ -15,7 +15,7 @@ module.exports = function(app, passport) {
     app.get('/login', function(req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('login.ejs', { message: req.flash('loginMessage') });
+        res.json({ message: req.flash('loginMessage') });
     });
 
 
@@ -28,10 +28,9 @@ module.exports = function(app, passport) {
 
     app.get('/faillogin', (req, res) => {
         res.json({
-            response: {
                 status: "fail",
                 message: req.flash('loginMessage')
-                }
+               
             })
     })
     
@@ -75,7 +74,8 @@ module.exports = function(app, passport) {
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/profile', isLoggedIn, function(req, res) {
         res.json({
-            status: "Success"
+            status: "Success",
+            message: req.flash('loginMessage')
              // get the user out of session and pass to template
         });
     });

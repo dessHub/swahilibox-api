@@ -8,6 +8,8 @@ let ticketSchema = mongoose.Schema({
     name     : String,
     ticketNo : String
 
+}, {
+    timestamps: true
 })
 
 module.exports = mongoose.model('Ticket', ticketSchema);

@@ -6,13 +6,15 @@ var eventSchema = mongoose.Schema({
       title        : String,
       organiser    : String,
       venue        : String,
-      start        : Date,
-      end          : Date,
+      start        : String,
+      end          : String,
       banner       : String,
       description  : String,
       status       : String
 
-});
+}, {
+      timestamps: true
+  });
 
 // methods ======================
 
