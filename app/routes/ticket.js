@@ -1,7 +1,7 @@
 const express = require('express');
 const app     = express();
 const router  = express.Router();
-const Event   = require('.../models/event');
+const Event   = require('../models/event');
 const User    = require('../models/user');
 const Ticket  = require('../models/ticket');
 
