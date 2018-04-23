@@ -1,5 +1,8 @@
+const express = require('express'),
+      app = express.Router(),
+      passport = require('passport')
 
-module.exports = function(app, passport) {
+module.exports = () => {
 
     // =====================================
     // HOME PAGE  ========
@@ -9,7 +12,7 @@ module.exports = function(app, passport) {
     // LOGIN ===============================
     // =====================================
     // show the login form
-    app.get('/login', function(req, res) {
+    app.get('/login', (req, res) => {
 
         // render the page and pass in any flash data if it exists
         res.json({ message: req.flash('loginMessage') });
@@ -35,7 +38,7 @@ module.exports = function(app, passport) {
     // SIGNUP ==============================
     // =====================================
     // show the signup form
-    app.get('/signup', function(req, res) {
+    app.get('/signup', (req, res) => {
 
         // render the page and pass in any flash data if it exists
         res.render('signup.ejs', { message: req.flash('signupMessage') });
@@ -69,7 +72,7 @@ module.exports = function(app, passport) {
     // =====================================
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
-    app.get('/profile', isLoggedIn, function(req, res) {
+    app.get('/profile', isLoggedIn, (req, res) => {
         res.json({
             status: "Success",
             message: req.flash('loginMessage')
@@ -80,7 +83,7 @@ module.exports = function(app, passport) {
     // =====================================
     // LOGOUT ==============================
     // =====================================
-    app.get('/logout', function(req, res) {
+    app.get('/logout', (req, res) => {
         req.logout();
         res.redirect('/');
     });

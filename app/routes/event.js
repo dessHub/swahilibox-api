@@ -34,11 +34,22 @@ app.post('/create-events', (req, res) => {
     
   });
   
-  app.get('/events', function(req, res, err){
-    Event.find({}, function(error, events){
+  app.get('/events', (req, res, err) => {
+    Event.find({}, (error, events) => {
       if(error) res.send(error);
       res.json(events);
     });
   });
+
+  app.get('/event:id', (req, res) => {
+      let eventid = req.params.id;
+      Event.findById(eventid, (err, event) => {
+          if(err){
+              res.json(err);
+          }else{
+              res.json(event);
+           }
+      }) 
+  })
 
 module.exports = app;

@@ -1,17 +1,17 @@
 // get all the packages we need
-var express  = require('express');
-var app      = express();
-var port     = process.env.PORT || 8080;
-var mongoose = require('mongoose');
-var passport = require('passport');
-var flash    = require('connect-flash');
+const express  = require('express'),
+      app      = express(),
+      port     = process.env.PORT || 8080,
+      mongoose = require('mongoose'),
+      passport = require('passport'),
+      flash    = require('connect-flash'),
+      morgan       = require('morgan'),
+      cookieParser = require('cookie-parser'),
+      bodyParser   = require('body-parser'),
+      session      = require('express-session'),
+      path    = require('path');
 
-var morgan       = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser   = require('body-parser');
-var session      = require('express-session');
-
-var configDB = require('./config/database.js');
+const configDB = require('./config/database.js');
 
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
@@ -24,6 +24,7 @@ app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser()); // get information from html forms
 
 app.set('view engine', 'ejs'); // set up ejs for templating
+app.use(express.static(path.join(__dirname, 'public')));
 
 // required for passport
 app.use(session({ secret: 'thisisasecret' })); // session secret
@@ -32,11 +33,14 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
-require('./app/routes/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
-const ticket = require('./app/routes/ticket');
-const event = require('./app/routes/event');
-app.use('/api', ticket);
-app.use('/admin', event);
+const auth = require('./routes/auth')(app, passport); // load our routes and pass in our app and fully configured passport
+const front = require('./routes/index');
+const admin = require('./routes/admin');
+const api  = require('./routes/api');
+app.use('/', front);
+app.use('/auth', auth);
+app.use('/api', api);
+app.use('/admin', admin);
 // launch ======================================================================
 app.listen(port);
 console.log('It is live on port ' + port);
