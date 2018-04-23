@@ -33,7 +33,7 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
-const auth = require('./routes/auth')(app, passport); // load our routes and pass in our app and fully configured passport
+const auth = require('./routes/auth'); // load our routes and pass in our app and fully configured passport
 const front = require('./routes/index');
 const admin = require('./routes/admin');
 const api  = require('./routes/api');
