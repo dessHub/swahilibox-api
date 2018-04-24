@@ -4,6 +4,7 @@
   "description": "Simple Express Authentication with passport",
   "main": "server.js",
   "dependencies": {
+    "aws-sdk": "^2.227.1",
     "bcrypt-nodejs": "latest",
     "body-parser": "~1.15.2",
     "connect-flash": "~0.1.1",

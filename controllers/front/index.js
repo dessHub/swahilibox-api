@@ -1,4 +1,6 @@
-
+const Event   = require('../../models/event');
+const User    = require('../../models/user');
+const Ticket  = require('../../models/ticket');
 
 let controller = {};
 
@@ -19,7 +21,11 @@ controller.startups = (req, res) => {
 }
 
 controller.events = (req, res) => {
-    res.render('front/events');
+    Event.find({}, (err, events) => {
+        if(err) throw err;
+
+        res.render('front/events', {events: events});  
+    })
 }
 
 module.exports = controller;

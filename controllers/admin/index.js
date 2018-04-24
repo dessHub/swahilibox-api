@@ -4,12 +4,24 @@ const Ticket  = require('../../models/ticket');
 
 let controller = {};
 
+controller.index = (req, res) => {
+    res.render('admin/index');
+}
+
+controller.members = (req, res) => {
+    res.render('admin/members');
+}
+
 controller.getEvents = (req, res) => {
     Event.find({}, (err, events) => {
         if(err) throw err;
 
-        res.json(events);
+        res.render('admin/events', {events: events});
     })
+}
+
+controller.getCreate = (req, res) => {
+    res.render('admin/create');
 }
 
 controller.addEvent = (req, res) => {
@@ -20,14 +32,15 @@ controller.addEvent = (req, res) => {
     event.description  =  req.body.description;
     event.start  =  req.body.start;;
     event.end  =  req.body.end;
-    event.banner = req.body.banner
+    event.banner = req.body.avatar
     event.status = "Active";
     event.organiser = req.body.organiser;
+    console.log(event);
     event.save((err, event) => {
         if(err){
             res.json(err);
         } else {
-        res.json({
+        res.render('admin', {
             success: true,
             event: event
         });
@@ -35,13 +48,13 @@ controller.addEvent = (req, res) => {
     });
 }
 
-controller.getEvents = (req, res) => {
+controller.getEvent = (req, res) => {
     let eventid = req.params.id;
     Event.findById(eventid, (err, event) => {
         if(err){
             res.json(err);
         }else{
-            res.json(event);
+            res.render('admin/event', {event: event});
          }
     })
 }
