@@ -2,9 +2,8 @@
 const Mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
-if (process.env.NODE_ENV !== 'production') {
-    dotenv.load();
-    }
+   dotenv.load();
+ 
 
 /*let url = process.env.dbHost;
 
