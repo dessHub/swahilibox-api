@@ -11,10 +11,10 @@ const express  = require('express'),
       session      = require('express-session'),
       path    = require('path');
 
-const configDB = require('./config/database.js');
+const connectToDb = require('./config/database');
 
 // configuration ===============================================================
-mongoose.connect(configDB.url); // connect to our database
+connectToDb();
 
 require('./config/passport')(passport); // pass passport for configuration
 
