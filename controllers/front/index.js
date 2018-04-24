@@ -7,7 +7,7 @@ controller.index = (req, res) => {
 }
 
 controller.team = (req, res) => {
-    res.render('front/teams');
+    res.render('front/team');
 }
 
 controller.services = (req, res) => {

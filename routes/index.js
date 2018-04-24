@@ -10,7 +10,7 @@ app.get('/team', (req, res) => {
     controller.team(req, res);
 })
 
-app.get('/startup', (req, res) => {
+app.get('/startups', (req, res) => {
     controller.startups(req, res);
 })
 
