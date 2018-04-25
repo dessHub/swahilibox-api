@@ -21,7 +21,7 @@ if (process.env.NODE_ENV !== 'production') {
 _mongoose2.default.Promise = global.Promise;
 
 var connectToDb = function connectToDb() {
-    var dbHost = process.env.dbHost;
+    var dbHost = process.env.MONGODB_URI;
 
     try {
         _mongoose2.default.connect('mongodb://' + dbHost);

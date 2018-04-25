@@ -16,6 +16,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', router);
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('starter listening on port 3000');
 });
