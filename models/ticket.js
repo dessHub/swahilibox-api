@@ -6,7 +6,12 @@ let ticketSchema = mongoose.Schema({
     eventId  : String,
     email    : String,
     name     : String,
-    ticketNo : String
+    ticketNo : String,
+    title    : String,
+    start    : String,
+    end      : String,
+    venue    : String,
+    organiser: String
 
 }, {
     timestamps: true

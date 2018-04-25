@@ -22,8 +22,8 @@ app.get('/services', (req, res) => {
     controller.services(req, res);
 })
 
-app.get('/adm', (req, res) => {
-    res.render('admin/index');
+app.post('/rsvp', (req, res) => {
+    controller.rsvp(req, res);
 })
 
 

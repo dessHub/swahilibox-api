@@ -1,5 +1,5 @@
 {
-  "name": "nodeauth",
+  "name": "Swahilibox API",
   "version": "1.0.0",
   "description": "Simple Express Authentication with passport",
   "main": "server.js",
@@ -25,6 +25,7 @@
     "path": "^0.12.7"
   },
   "scripts": {
+    "start": "node server.js"
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

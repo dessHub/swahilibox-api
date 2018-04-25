@@ -31,7 +31,7 @@
                     <h3><%= events[i].title %></h3>
                     <p><%= events[i].description %> </p>          <span><strong><%= events[i].start %></strong></span>
                     <div class="event-rsvp">
-                     <button class="btn btn-default">RSVP</button>
+                     <a href="/front/rsvp<%= events[i]._id %>"><button class="btn btn-default">RSVP</button></a>
                     </div>
                    </div>
                   </div>
