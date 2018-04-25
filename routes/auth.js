@@ -18,9 +18,20 @@ module.exports = () => {
         res.json({ message: req.flash('loginMessage') });
     });
 
+    app.get('/front/login', (req, res) => {
 
-        // process the login form
-    app.post('/login', passport.authenticate('local-login', {
+        res.render('front/login', { message: req.flash('loginMessage') });
+    })
+
+     // process the web login form
+    app.post('/front/login', passport.authenticate('web-login', {
+        successRedirect : '/admin', // redirect to the secure profile section
+        failureRedirect : '/front/signup', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
+    }));
+
+        // process the mobile login form
+    app.post('/login', passport.authenticate('mobile-login', {
         successRedirect : '/profile', // redirect to the secure profile section
         failureRedirect : '/faillogin', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
@@ -45,27 +56,18 @@ module.exports = () => {
     });
 
     // process the signup form
-    app.post('/signup', passport.authenticate('local-signup', {
+    app.post('/signup', passport.authenticate('mobile-signup', {
         successRedirect : '/profile', // redirect to the secure profile section
         failureRedirect : '/signup', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
 
-    // =====================================
-    // FACEBOOK ROUTES =====================
-    // =====================================
-    // route for facebook authentication and login
-    app.get('/auth/facebook', passport.authenticate('facebook', { 
-      scope : ['public_profile', 'email']
+    // process the web signup form
+    app.post('/front/signup', passport.authenticate('web-signup', {
+        successRedirect : '/', // redirect to the secure profile section
+        failureRedirect : '/front/signup', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
     }));
-
-    // handle the callback after facebook has authenticated the user
-    app.get('/auth/facebook/callback',
-        passport.authenticate('facebook', {
-            successRedirect : '/profile',
-            failureRedirect : '/'
-        }));
-
 
     // =====================================
     // PROFILE SECTION =====================

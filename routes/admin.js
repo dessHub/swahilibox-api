@@ -14,19 +14,19 @@ aws.config.region = 'eu-west-1';
  */
 const S3_BUCKET = process.env.S3_BUCKET;
 
-app.get('/', (req, res) => {
+app.get('/', isLoggedIn, (req, res) => {
     controller.index(req, res);
 })
 
-app.get('/members', (req, res) => {
+app.get('/members', isLoggedIn, (req, res) => {
     controller.members(req, res);
 })
 
-app.get('/events', (req, res) => {
+app.get('/events', isLoggedIn, (req, res) => {
     controller.getEvents(req, res);
 })
 
-app.get('/create', (req, res) => {
+app.get('/create', isLoggedIn, (req, res) => {
     controller.getCreate(req, res);
 })
 
@@ -56,12 +56,25 @@ app.get('/sign-s3', (req, res) => {
     });
   });
 
-app.post('/create', (req, res) => {
+app.post('/create', isLoggedIn, (req, res) => {
     controller.addEvent(req, res);
 })
 
-app.get('/event:id', (req, res) => {
+app.get('/event:id', isLoggedIn, (req, res) => {
     controller.getEvent(req, res);
 })
+
+
+// route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated())
+        return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
+
 
 module.exports = app;
