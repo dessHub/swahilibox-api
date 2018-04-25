@@ -1,5 +1,5 @@
 {
-  "name": "Swahilibox API",
+  "name": "spaceapi",
   "version": "1.0.0",
   "description": "Simple Express Authentication with passport",
   "main": "server.js",
