@@ -8,7 +8,7 @@ dotenv.load();
 Mongoose.Promise = global.Promise;
 
 const connectToDb = () => {
-    let dbHost = process.env.dbHost;
+    let dbHost = process.env.MONGODB_URI;
     
     try {
         Mongoose.connect(`mongodb://${dbHost}`);
