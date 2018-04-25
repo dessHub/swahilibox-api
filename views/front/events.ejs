@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <% include ../partials/head.ejs %>
+  </head>
+  <body >
+    <% include ../partials/nav.ejs %>
+    <div id="app">
+
+        <div class="top-events">
+            <h2>Events</h2>
+           </div>
+         
+           <div class="events">
+             <div class="container">
+              <div class="row">
+                <div class="col-md-12 col-xs-12">
+                  <% if(events.length < 1) { %>
+                   <div class="jumbotron text-center">There are no events at the moment</div>
+                  <% }else{ %>
+                 <% for(let i = 0;i<events.length; i++) { %>
+                 <div class="event">
+                 <div class="col-md-12 col-xs-12">
+                  <div class="col-md-offset-1 col-md-4 col-xs-12">
+                    <div class="event-img">
+                     <img class="img-responsive" src="<%= events[i].banner %>">
+                    </div>
+                  </div>
+                  <div class="col-md-5 col-md-12">
+                   <div class="event-cont">
+                    <h3><%= events[i].title %></h3>
+                    <p><%= events[i].description %> </p>          <span><strong><%= events[i].start %></strong></span>
+                    <div class="event-rsvp">
+                     <a href="/front/rsvp<%= events[i]._id %>"><button class="btn btn-default">RSVP</button></a>
+                    </div>
+                   </div>
+                  </div>
+                  </div>
+                 </div>
+                 <% } %>
+                 <% } %>
+                 
+         
+                </div>
+              </div>
+             </div>
+           </div>
+
+    </div>
+    <% include ../partials/footer.ejs %>
+  </body>
+</html>

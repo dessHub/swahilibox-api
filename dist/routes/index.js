@@ -1,32 +1,31 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
+var express = require('express');
+var app = express.Router();
+var controller = require('../controllers/front/index');
+
+app.get('/', function (req, res) {
+    controller.index(req, res);
 });
 
-var _express = require('express');
-
-var _express2 = _interopRequireDefault(_express);
-
-var _user = require('../models/user');
-
-var _user2 = _interopRequireDefault(_user);
-
-var _user3 = require('../controllers/user');
-
-var _user4 = _interopRequireDefault(_user3);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var router = _express2.default.Router();
-
-
-router.get('/', function (req, res) {
-    _user4.default.index(req, res);
+app.get('/team', function (req, res) {
+    controller.team(req, res);
 });
 
-router.post('/adduser', function (req, res) {
-    _user4.default.addUser(req, res);
+app.get('/startups', function (req, res) {
+    controller.startups(req, res);
 });
 
-exports.default = router;
+app.get('/events', function (req, res) {
+    controller.events(req, res);
+});
+
+app.get('/services', function (req, res) {
+    controller.services(req, res);
+});
+
+app.post('/rsvp', function (req, res) {
+    controller.rsvp(req, res);
+});
+
+module.exports = app;

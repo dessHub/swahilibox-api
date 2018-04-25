@@ -1,0 +1,130 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+
+<title>Swahilibox : Admin</title>
+
+<% include ../admin/partials/head.ejs %>
+  </head>
+
+<body>
+<% include ../admin/partials/nav %>
+
+<!--menu bar-->
+ <aside>
+<% include ../admin/partials/sidebar %>
+ </aside>
+
+
+
+ <section id="main-content">
+
+
+        <section class="wrapper">
+
+          <div class="row">
+              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <div class="info-box white-bg">
+          <div id="buttons">
+          <a href="" class="button">ADD</a>
+          <a href="" class="button">DELETE</a>
+        </div><!--/ .buttons -->             	
+      </div><!--/.info-box-->			
+          </div><!--/.col-->
+              
+              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <div class="info-box white-bg">
+                      <div id="buttons">
+        <a href="" class="button">EDIT</a>
+        <a href="" class="button">DELETE</a>
+        </div><!--/ .buttons -->  						
+                  </div><!--/.info-box-->			
+              </div><!--/.col-->	
+              
+              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <div class="info-box white-bg">
+          <div id="buttons">
+                  <a href="" class="button">EDIT</a>
+        <a href="" class="button">DELETE</a>
+        </div><!--/ .buttons -->						
+                  </div><!--/.info-box-->			
+               </div><!--/.col-->		
+
+         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <div class="info-box white-bg">
+          <div id="buttons">
+        <a href="" class="button">EDIT</a>
+        <a href="" class="button">DELETE</a>
+        </div><!--/ .buttons -->            
+        </div><!--/.info-box-->     
+         </div><!--/.col--> 
+
+         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <div class="info-box white-bg">
+          <div id="buttons">
+        <a href="" class="button">EDIT</a>
+        <a href="" class="button">DELETE</a>
+        </div><!--/ .buttons -->            
+        </div><!--/.info-box-->     
+         </div><!--/.col--> 
+
+         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <div class="info-box white-bg">
+          <div id="buttons">
+        <a href="" class="button">EDIT</a>
+        <a href="" class="button">DELETE</a>
+        </div><!--/ .buttons -->            
+        </div><!--/.info-box-->     
+         </div><!--/.col--> 	
+          </div><!--/.row-->
+
+    <div id="final-buttons">
+        <a href="" class="final-button">SAVE</a>
+        <a href="" class="final-button">CANCEL</a>
+        </div><!--/ .buttons --> 
+
+        <a href="/admin/create"><button id="" class="final-button">Create new event</button></a>
+
+          <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+          <h2>Event Details</h2>
+      </div>
+
+    <div class="modal-body">
+         <h5>EVENT TITLE<span class="required">*</span></h5>
+      <input type="text" name="Event Title" placeholder="catchy name">
+       <h5>VENUE<span class="required">*</span></h5>
+      <input type="text" name="Event venue" placeholder="Venue">
+       <h5>LOCATION<span class="required">*</span></h5>
+      <input type="text" name="Event Title" placeholder="Where is it located?">
+       <h5>ORGANIZERS<span class="required">*</span></h5>
+      <input type="text" name="Event organizer" placeholder="we are organizing">
+      <h5>ADD IMAGE</h5>
+        <input type="file" name="file" id="image_file" />   
+                                          <h3 align="center">Image Preview</h3>  
+                                          <div id="image_preview" style="display: none">  
+                                          </div>  
+      <h5>DESCRIPTION<span class="required">*</span></h5>
+      <textarea rows="4" cols="50"></textarea>
+      
+    <div style="position: absolute; bottom: 0;right:0;"><a href="" class="final-button">SAVE</a></div>
+    </div>
+  </div>
+</div>
+
+                
+</section>
+<!--content-->
+
+<!-- javascripts -->
+
+</body>
+</html>

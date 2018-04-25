@@ -1,14 +1,30 @@
-import express from 'express';
-import User from '../models/user';
-const router = express.Router();
-import UserController from '../controllers/user';
+const express = require('express');
+const app = express.Router();
+const controller = require('../controllers/front/index');
 
-router.get('/', (req, res) => {
-    UserController.index(req, res);
-});
+app.get('/', (req, res) => {
+    controller.index(req,res);
+})
 
-router.post('/adduser', (req, res) => {
-    UserController.addUser(req, res);
-});
+app.get('/team', (req, res) => {
+    controller.team(req, res);
+})
 
-export default router;
+app.get('/startups', (req, res) => {
+    controller.startups(req, res);
+})
+
+app.get('/events', (req, res) => {
+    controller.events(req, res);
+})
+
+app.get('/services', (req, res) => {
+    controller.services(req, res);
+})
+
+app.post('/rsvp', (req, res) => {
+    controller.rsvp(req, res);
+})
+
+
+module.exports = app;

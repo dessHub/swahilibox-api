@@ -1,24 +1,28 @@
 'use strict';
 
-var _mongoose = require('mongoose');
+var mongoose = require('mongoose');
+var bcrypt = require('bcrypt-nodejs');
 
-var _mongoose2 = _interopRequireDefault(_mongoose);
+// define the schema for our user model
+var userSchema = mongoose.Schema({
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Schema = _mongoose2.default.Schema;
-
-// create a schema
-// grab the things we need
-var userSchema = new Schema({
-  name: String,
-  username: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
+    local: {
+        email: String,
+        role: String,
+        password: String
+    }
 });
 
-// the schema is useless so far
-// we need to create a model using it
-var User = _mongoose2.default.model('User', userSchema);
+// methods ======================
+// generating a hash
+userSchema.methods.generateHash = function (password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
 
-// make this available to our users in our Node applications
-module.exports = User;
+// checking if password is valid
+userSchema.methods.validPassword = function (password) {
+    return bcrypt.compareSync(password, this.local.password);
+};
+
+// create the model for users and expose it to our app
+module.exports = mongoose.model('User', userSchema);
