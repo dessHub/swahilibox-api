@@ -19,7 +19,7 @@ const connectToDb = () => {
     let dbHost = process.env.dbHost;
     
     try {
-        Mongoose.connect(`mongodb://${dbHost}`);
+        Mongoose.connect(`mongodb://root:space28.@ds149309.mlab.com:49309/spaceapi`);
         console.log('Connected to mongo!!!');
     }
     catch (err) {
