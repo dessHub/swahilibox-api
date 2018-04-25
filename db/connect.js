@@ -9,11 +9,9 @@ Mongoose.Promise = global.Promise;
 
 const connectToDb = () => {
     let dbHost = process.env.dbHost;
-    let dbPort = process.env.dbPort;
-    let dbName = process.env.dbName;
     
     try {
-        Mongoose.connect(`mongodb://${dbHost}:${dbPort}/${dbName}`);
+        Mongoose.connect(`mongodb://${dbHost}`);
         console.log('Connected to mongo!!!');
     }
     catch (err) {
