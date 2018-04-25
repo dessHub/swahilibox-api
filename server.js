@@ -13,7 +13,7 @@ const express  = require('express'),
 
 const connectToDb = require('./config/database');
 
-dotenv.load();
+//dotenv.load();
 
 const port     = process.env.PORT || 8080;
 
