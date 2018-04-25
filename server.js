@@ -18,7 +18,7 @@ const connectToDb = require('./config/database');
 const port     = process.env.PORT || 8080;
 
 // configuration ===============================================================
-connectToDb();
+mongoose.connect(connectToDb.url);
 
 require('./config/passport')(passport); // pass passport for configuration
 
