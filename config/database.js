@@ -2,7 +2,7 @@
 const Mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
-   dotenv.load();
+   //dotenv.load();
  
 
 /*let url = process.env.dbHost;
