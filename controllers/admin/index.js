@@ -25,7 +25,7 @@ controller.getCreate = (req, res) => {
 }
 
 controller.addEvent = (req, res) => {
-    event       =  new Event();
+    let event       =  new Event();
   
     event.title =  req.body.title;
     event.venue =  req.body.venue;;
