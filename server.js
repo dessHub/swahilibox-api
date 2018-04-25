@@ -1,7 +1,7 @@
 // get all the packages we need
 const express  = require('express'),
       app      = express(),
-      port     = process.env.PORT || 8080,
+      dotenv = require('dotenv'),
       mongoose = require('mongoose'),
       passport = require('passport'),
       flash    = require('connect-flash'),
@@ -12,6 +12,10 @@ const express  = require('express'),
       path    = require('path');
 
 const connectToDb = require('./config/database');
+
+dotenv.load();
+
+const port     = process.env.PORT || 8080;
 
 // configuration ===============================================================
 connectToDb();
