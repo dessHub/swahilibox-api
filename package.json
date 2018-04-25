@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Simple Express Authentication with passport",
   "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "aws-sdk": "^2.227.1",
     "bcrypt-nodejs": "latest",
@@ -23,10 +27,6 @@
     "passport-local": "~1.0.0",
     "passport-twitter": "~1.0.4",
     "path": "^0.12.7"
-  },
-  "scripts": {
-    "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "Passport",
