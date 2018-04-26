@@ -78,7 +78,7 @@ function isLoggedIn(req, res, next) {
 
 function isAdmin(req, res, next) {
     var user = req.user;
-    if (user.role == "Admin") {
+    if (user.local.role == "Admin") {
         return next();
     }
 
