@@ -6,9 +6,12 @@ var bcrypt   = require('bcrypt-nodejs');
 var userSchema = mongoose.Schema({
 
     local            : {
-        email        : String,
+        email        : {
+            type: String,
+            index: true
+        },
         role         : String,
-        password     : String,
+        password     : String
     }
 });
 
@@ -23,5 +26,12 @@ userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.local.password);
 };
 
+
 // create the model for users and expose it to our app
-module.exports = mongoose.model('User', userSchema);
+let User = module.exports = mongoose.model('User', userSchema);
+
+
+module.exports.getUserByUsername = function(email, callback){
+
+    User.findOne({"local.email":email}, callback);
+}

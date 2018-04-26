@@ -7,7 +7,10 @@ var bcrypt = require('bcrypt-nodejs');
 var userSchema = mongoose.Schema({
 
     local: {
-        email: String,
+        email: {
+            type: String,
+            index: true
+        },
         role: String,
         password: String
     }
@@ -25,4 +28,9 @@ userSchema.methods.validPassword = function (password) {
 };
 
 // create the model for users and expose it to our app
-module.exports = mongoose.model('User', userSchema);
+var User = module.exports = mongoose.model('User', userSchema);
+
+module.exports.getUserByUsername = function (email, callback) {
+
+    User.findOne({ "local.email": email }, callback);
+};

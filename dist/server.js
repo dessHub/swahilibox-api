@@ -53,6 +53,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var app = (0, _express2.default)();
 
 (0, _connect2.default)();
+require('./config/passport')(_passport2.default); // pass passport for configuration
 
 app.use((0, _cors2.default)());
 // set up our express application

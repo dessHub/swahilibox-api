@@ -2,7 +2,8 @@
 
 var express = require('express'),
     app = express.Router(),
-    passport = require('passport');
+    passport = require('passport'),
+    User = require('../models/user');
 
 // =====================================
 // HOME PAGE  ========
@@ -24,16 +25,16 @@ app.get('/front/login', function (req, res) {
 });
 
 // process the web login form
-app.post('/front/login', passport.authenticate('web-login', {
+app.post('/front/login', passport.authenticate('local-login', {
     successRedirect: '/admin', // redirect to the secure profile section
-    failureRedirect: '/front/signup', // redirect back to the signup page if there is an error
+    failureRedirect: '/auth/front/login', // redirect back to the signup page if there is an error
     failureFlash: true // allow flash messages
 }));
 
 // process the mobile login form
-app.post('/login', passport.authenticate('mobile-login', {
-    successRedirect: '/profile', // redirect to the secure profile section
-    failureRedirect: '/faillogin', // redirect back to the signup page if there is an error
+app.post('/login', passport.authenticate('local-login', {
+    successRedirect: 'auth/profile', // redirect to the secure profile section
+    failureRedirect: 'auth/faillogin', // redirect back to the signup page if there is an error
     failureFlash: true // allow flash messages
 }));
 
@@ -62,15 +63,15 @@ app.get('/front/signup', function (req, res) {
     res.render('front/signup.ejs', { message: req.flash('signupMessage') });
 });
 
-// process the signup form
-app.post('/signup', passport.authenticate('mobile-signup', {
+// process the mobile signup form
+app.post('/signup', passport.authenticate('local-signup', {
     successRedirect: '/profile', // redirect to the secure profile section
     failureRedirect: '/signup', // redirect back to the signup page if there is an error
     failureFlash: true // allow flash messages
 }));
 
 // process the web signup form
-app.post('/front/signup', passport.authenticate('web-signup', {
+app.post('/front/signup', passport.authenticate('local-signup', {
     successRedirect: '/', // redirect to the secure profile section
     failureRedirect: '/auth/front/signup', // redirect back to the signup page if there is an error
     failureFlash: true // allow flash messages
@@ -95,6 +96,27 @@ app.get('/profile', isLoggedIn, function (req, res) {
 app.get('/logout', function (req, res) {
     req.logout();
     res.redirect('/');
+});
+
+//Admin can change roles for users via this route
+app.get('/role/:email/:role', function (req, res) {
+    var role = req.params.role;
+    var email = req.params.email;
+    console.log(email);
+    User.getUserByUsername(email, function (err, user) {
+        if (err) return err;
+        console.log(user);
+        if (user) {
+            if (role == 'Admin') {
+                user.update({ "local.role": role }, function (err, user) {
+                    if (err) return err;
+                    res.redirect('/');
+                });
+            }
+        } else {
+            res.send("user does not exist");
+        }
+    });
 });
 
 // route middleware to make sure a user is logged in

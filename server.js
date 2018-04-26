@@ -15,6 +15,7 @@ import path    from 'path';
 const app = express();
 
 connectToDb();
+require('./config/passport')(passport); // pass passport for configuration
 
 app.use(cors());
 // set up our express application
