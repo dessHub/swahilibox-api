@@ -7,6 +7,10 @@ app.get('/events', (req, res) => {
     controller.getEvents(req, res);
 })
 
+app.get('/past_events', (req, res) => {
+    controller.getPast(req, res);
+})
+
 app.post('/rsvp', (req, res) => {
     controller.rsvp(req, res);
 })

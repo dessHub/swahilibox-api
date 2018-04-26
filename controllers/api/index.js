@@ -17,6 +17,19 @@ controller.getEvents = (req, res) => {
       });
 }
 
+controller.getPast = (req, res) => {
+    Event.find({"status": "Archived"}, (error, events) => {
+        if(error){
+            res.jsond({
+                status: "Error",
+                message: error
+            });
+        }else{
+        res.json(events);
+        }
+      });
+}
+
 controller.rsvp = (req, res) => {
     let event_id = req.body.event_id;
     let email = req.body.user_email;

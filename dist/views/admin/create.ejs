@@ -46,7 +46,12 @@
                         <div class="form-group">
                             <div class="col-md-6 col-xs-12">
                              <label>START<span class="required">*</span></label>
-                             <input type="text" name="start" class="form-control" placeholder="Start">
+                             <div class='input-group date' id='datetimepicker1'>
+                              <input type='text' name="start" class="form-control" />
+                              <span class="input-group-addon">
+                                  <span class="glyphicon glyphicon-calendar"></span>
+                              </span>
+                          </div>
                             </div>
                             <div class="col-md-6 col-xs-12">
                              <label>END<span class="required">*</span></label>
@@ -139,6 +144,10 @@
         (() => {
             document.getElementById('file-input').onchange = initUpload;
         })();
+
+        $(function () {
+            $('#datetimepicker1').datetimepicker();
+        });
         </script>
 
 </body>

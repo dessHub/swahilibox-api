@@ -16,19 +16,19 @@ aws.config.region = 'eu-west-1';
  */
 var S3_BUCKET = process.env.S3_BUCKET;
 
-app.get('/', isLoggedIn, function (req, res) {
+app.get('/', isLoggedIn, isAdmin, function (req, res) {
     controller.index(req, res);
 });
 
-app.get('/members', isLoggedIn, function (req, res) {
+app.get('/members', isLoggedIn, isAdmin, function (req, res) {
     controller.members(req, res);
 });
 
-app.get('/events', isLoggedIn, function (req, res) {
+app.get('/events', isLoggedIn, isAdmin, function (req, res) {
     controller.getEvents(req, res);
 });
 
-app.get('/create', isLoggedIn, function (req, res) {
+app.get('/create', isLoggedIn, isAdmin, function (req, res) {
     controller.getCreate(req, res);
 });
 
@@ -58,11 +58,11 @@ app.get('/sign-s3', function (req, res) {
     });
 });
 
-app.post('/create', isLoggedIn, function (req, res) {
+app.post('/create', isLoggedIn, isAdmin, function (req, res) {
     controller.addEvent(req, res);
 });
 
-app.get('/event:id', isLoggedIn, function (req, res) {
+app.get('/event:id', isLoggedIn, isAdmin, function (req, res) {
     controller.getEvent(req, res);
 });
 
@@ -74,6 +74,15 @@ function isLoggedIn(req, res, next) {
 
     // if they aren't redirect them to the home page
     res.redirect('/auth/front/login');
+}
+
+function isAdmin(req, res, next) {
+    var user = req.user;
+    if (user.role == "Admin") {
+        return next();
+    }
+
+    res.redirect('/');
 }
 
 module.exports = app;

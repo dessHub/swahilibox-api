@@ -19,6 +19,19 @@ controller.getEvents = function (req, res) {
     });
 };
 
+controller.getPast = function (req, res) {
+    Event.find({ "status": "Archived" }, function (error, events) {
+        if (error) {
+            res.jsond({
+                status: "Error",
+                message: error
+            });
+        } else {
+            res.json(events);
+        }
+    });
+};
+
 controller.rsvp = function (req, res) {
     var event_id = req.body.event_id;
     var email = req.body.user_email;
