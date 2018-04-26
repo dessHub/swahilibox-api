@@ -33,8 +33,8 @@ app.post('/front/login', passport.authenticate('local-login', {
 
 // process the mobile login form
 app.post('/login', passport.authenticate('local-login', {
-    successRedirect: 'auth/profile', // redirect to the secure profile section
-    failureRedirect: 'auth/faillogin', // redirect back to the signup page if there is an error
+    successRedirect: '/auth/profile', // redirect to the secure profile section
+    failureRedirect: '/auth/faillogin', // redirect back to the signup page if there is an error
     failureFlash: true // allow flash messages
 }));
 

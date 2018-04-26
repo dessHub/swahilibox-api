@@ -8,6 +8,11 @@
 <title>Swahilibox : Admin</title>
 
 <% include ../admin/partials/head.ejs %>
+<script type="text/javascript">
+  $(function () {
+      $('#datetimepicker1').datetimepicker();
+  });
+</script>
   </head>
 
 <body>
@@ -145,8 +150,8 @@
             document.getElementById('file-input').onchange = initUpload;
         })();
 
-        $(function () {
-            $('#datetimepicker1').datetimepicker();
+        (function () {
+            ('#datetimepicker1').datetimepicker();
         });
         </script>
 
