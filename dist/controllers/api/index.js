@@ -34,8 +34,8 @@ controller.getPast = function (req, res) {
 
 controller.rsvp = function (req, res) {
     var event_id = req.body.event_id;
-    var email = req.body.user_email;
-    var name = req.body.user_name;
+    var email = req.body.email;
+    var name = req.body.name;
     var randomno = Math.random().toString();
 
     Event.findById(event_id, function (err, event) {
@@ -56,7 +56,7 @@ controller.rsvp = function (req, res) {
 
             res.json({
                 status: "Success",
-                ticket: ticket
+                ticket: ticket.ticketNo
             });
         });
     });

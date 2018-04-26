@@ -35,7 +35,8 @@
                 <div class="panel-content"><%= events[i].description %></br>
                   <strong>Venue: <%= events[i].venue %>.</strong></br>
                   <strong>Start:<%= events[i].start %></strong></br>
-                  <strong>End: <%= events[i].end %></strong>
+                  <strong>End: <%= events[i].end %></strong></br>
+                  <strong>Organiser: <%= events[i].organiser %></strong>
                 </div>
                 <a href="/admin/event<%= events[i]._id %>" class="button">VIEW</a>
                 <a href="/admin/event/delete<%= events[i].title %>" class="button">DELETE</a>

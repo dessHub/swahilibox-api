@@ -32,8 +32,8 @@ controller.getPast = (req, res) => {
 
 controller.rsvp = (req, res) => {
     let event_id = req.body.event_id;
-    let email = req.body.user_email;
-    let name = req.body.user_name;
+    let email = req.body.email;
+    let name = req.body.name;
     let randomno = Math.random().toString();
 
     Event.findById(event_id, (err, event) => {
@@ -54,7 +54,7 @@ controller.rsvp = (req, res) => {
 
             res.json({
                 status: "Success",
-                ticket: ticket
+                ticket: ticket.ticketNo
             })
         }) 
     })

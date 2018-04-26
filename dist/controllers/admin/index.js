@@ -70,4 +70,26 @@ controller.getEdit = function (req, res) {
     });
 };
 
+controller.postEdit = function (req, res) {
+    var id = req.body.event_id;
+    Event.findById(id, function (err, event) {
+        if (err) throw err;
+        event.title = req.body.title;
+        event.venue = req.body.venue;;
+        event.description = req.body.description;
+        event.start = req.body.start;;
+        event.end = req.body.end;
+        event.banner = req.body.avatar;
+        event.status = event.status;
+        event.organiser = req.body.organiser;
+        console.log(event);
+        event.save(function (err) {
+            if (err) throw err;
+            var red_to = "'/admin/event" + id + "'";
+            console.log(red_to);
+            res.redirect(red_to);
+        });
+    });
+};
+
 module.exports = controller;
