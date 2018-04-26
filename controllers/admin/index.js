@@ -40,10 +40,8 @@ controller.addEvent = (req, res) => {
         if(err){
             res.json(err);
         } else {
-        res.render('admin', {
-            success: true,
-            event: event
-        });
+            let red = "'/admin/event" + event._id + "'";
+        res.redirect(red)
       }
     });
 }

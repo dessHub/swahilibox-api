@@ -42,10 +42,8 @@ controller.addEvent = function (req, res) {
         if (err) {
             res.json(err);
         } else {
-            res.render('admin', {
-                success: true,
-                event: event
-            });
+            var red = "'/admin/event" + event._id + "'";
+            res.redirect(red);
         }
     });
 };

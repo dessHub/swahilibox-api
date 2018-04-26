@@ -6,8 +6,8 @@ var eventSchema = mongoose.Schema({
       title        : String,
       organiser    : String,
       venue        : String,
-      start        : String,
-      end          : String,
+      start        : Date,
+      end          : Date,
       banner       : String,
       description  : String,
       status       : String

@@ -9,9 +9,13 @@
 
 <% include ../admin/partials/head.ejs %>
 <script type="text/javascript">
-  $(function () {
-      $('#datetimepicker1').datetimepicker();
+$(function() {
+  $('.datetimepicker').datetimepicker();
+  
+  $('.datetimepicker-addon').on('click', function() {
+  	$(this).prev('input.datetimepicker').data('DateTimePicker').toggle();
   });
+});
 </script>
   </head>
 
@@ -47,32 +51,37 @@
                             <label>ORGANIZER<span class="required">*</span></label>
                             <input type="text" name="organizer" class="form-control" placeholder="ORGANIZER">
                         </div>
+         
+                        <div class="" style="margin-bottom: 5px;">
+                          <input type="file" id="file-input">
+                          <p id="status">Please select a file</p>
+                          <img style="border:1px solid gray;width:300px;height: 100px;"  id="preview" src="/images/images.jpeg">
+                        </div>
             
                         <div class="form-group">
                             <div class="col-md-6 col-xs-12">
                              <label>START<span class="required">*</span></label>
-                             <div class='input-group date' id='datetimepicker1'>
-                              <input type='text' name="start" class="form-control" />
-                              <span class="input-group-addon">
-                                  <span class="glyphicon glyphicon-calendar"></span>
+                             <div class='input-group date'>
+                              <input type='text' name="start" class="form-control datetimepicker" />
+                              <span class="input-group-addon datetimepicker-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
                               </span>
-                          </div>
+                            </div>
                             </div>
                             <div class="col-md-6 col-xs-12">
                              <label>END<span class="required">*</span></label>
-                             <input type="text" name="end" class="form-control" placeholder="End">
+                             <div class='input-group date'>
+                              <input type='text' name="end" class="form-control datetimepicker" />
+                              <span class="input-group-addon datetimepicker-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                              </span>
+                            </div>
                             </div>
                         </div>  
                         
                         <div class="form-group">
                             <label>DESCRIPTION<span class="required">*</span></label>
                             <textarea name="description" rows="2" class="form-control"></textarea>
-                        </div>
-         
-                        <div class="" style="margin-bottom: 5px;">
-                          <input type="file" id="file-input">
-                          <p id="status">Please select a file</p>
-                          <img style="border:1px solid gray;width:300px;height: 100px;"  id="preview" src="/images/images.jpeg">
                         </div>
                         
                         <div class="form-group">
@@ -150,10 +159,7 @@
             document.getElementById('file-input').onchange = initUpload;
         })();
 
-        (function () {
-            ('#datetimepicker1').datetimepicker();
-        });
-        </script>
+         </script>
 
 </body>
 </html>

@@ -21,72 +21,30 @@
 
 
  <section id="main-content">
-
+ 
 
         <section class="wrapper">
-
+            <a href="/admin/create"><button id="" class="final-button">Create new event</button></a>
           <div class="row">
-              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                  <div class="info-box white-bg">
-          <div id="buttons">
-          <a href="" class="button">ADD</a>
-          <a href="" class="button">DELETE</a>
-        </div><!--/ .buttons -->             	
-      </div><!--/.info-box-->			
-          </div><!--/.col-->
-              
-              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                  <div class="info-box white-bg">
-                      <div id="buttons">
-        <a href="" class="button">EDIT</a>
-        <a href="" class="button">DELETE</a>
-        </div><!--/ .buttons -->  						
-                  </div><!--/.info-box-->			
-              </div><!--/.col-->	
-              
-              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                  <div class="info-box white-bg">
-          <div id="buttons">
-                  <a href="" class="button">EDIT</a>
-        <a href="" class="button">DELETE</a>
-        </div><!--/ .buttons -->						
-                  </div><!--/.info-box-->			
-               </div><!--/.col-->		
-
-         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-        <div class="info-box white-bg">
-          <div id="buttons">
-        <a href="" class="button">EDIT</a>
-        <a href="" class="button">DELETE</a>
-        </div><!--/ .buttons -->            
-        </div><!--/.info-box-->     
-         </div><!--/.col--> 
-
-         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-        <div class="info-box white-bg">
-          <div id="buttons">
-        <a href="" class="button">EDIT</a>
-        <a href="" class="button">DELETE</a>
-        </div><!--/ .buttons -->            
-        </div><!--/.info-box-->     
-         </div><!--/.col--> 
-
-         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-        <div class="info-box white-bg">
-          <div id="buttons">
-        <a href="" class="button">EDIT</a>
-        <a href="" class="button">DELETE</a>
-        </div><!--/ .buttons -->            
-        </div><!--/.info-box-->     
-         </div><!--/.col--> 	
+            <% for(let i=0;i<events.length;i++) { %>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+              <div class="info-box white-bg">
+                <div class="panel-body">
+                <div class="panel-heading"><%= events[i].title %></div>
+                <img src="<%= events[i].banner %>" class="img-rounded" width="150" height="200">
+                <div class="panel-content"><%= events[i].description %></br>
+                  <strong>Venue: <%= events[i].venue %>.</strong></br>
+                  <strong>Start:<%= events[i].start %></strong></br>
+                  <strong>End: <%= events[i].end %></strong>
+                </div>
+                <a href="/admin/event<%= events[i]._id %>" class="button">EDIT</a>
+                <a href="/admin/event/delete<%= events[i].title %>" class="button">DELETE</a>
+                </div><!--/ .buttons -->             	
+              </div><!--/.info-box-->			
+            </div>
+            <% } %>
+ 	
           </div><!--/.row-->
-
-    <div id="final-buttons">
-        <a href="" class="final-button">SAVE</a>
-        <a href="" class="final-button">CANCEL</a>
-        </div><!--/ .buttons --> 
-
-        <a href="/admin/create"><button id="" class="final-button">Create new event</button></a>
 
           <!-- The Modal -->
     <div id="myModal" class="modal">
