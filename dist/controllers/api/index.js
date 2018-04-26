@@ -21,8 +21,9 @@ controller.getEvents = function (req, res) {
 
 controller.rsvp = function (req, res) {
     var event_id = req.body.event_id;
-    var email = req.body.email;
-    var name = req.body.name;
+    var email = req.body.user_email;
+    var name = req.body.user_name;
+    var randomno = Math.random().toString();
 
     Event.findById(event_id, function (err, event) {
         if (err) throw err;
@@ -35,7 +36,7 @@ controller.rsvp = function (req, res) {
         ticket.end = event.end;
         ticket.venue = event.venue;
         ticket.organiser = event.organiser;
-        ticket.ticketNo = 8989;
+        ticket.ticketNo = randomno;
 
         ticket.save(function (err, ticket) {
             if (err) throw err;
