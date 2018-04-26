@@ -1,6 +1,6 @@
 
 // load all the things we need
-import LocalStrategy  from ('passport-local').Strategy;
+const LocalStrategy  = require('passport-local').Strategy;
 
 // load up the user model
 import User  from '../models/user';

@@ -20,10 +20,6 @@ var _connect = require('./config/connect');
 
 var _connect2 = _interopRequireDefault(_connect);
 
-var _index = require('./routes/index');
-
-var _index2 = _interopRequireDefault(_index);
-
 var _dotenv = require('dotenv');
 
 var _dotenv2 = _interopRequireDefault(_dotenv);
@@ -74,7 +70,7 @@ app.use(_passport2.default.session()); // persistent login sessions
 app.use((0, _connectFlash2.default)()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
-var auth = require('./routes/auth'); // load our routes and pass in our app and fully configured passport
+var auth = require('./routes/authfile'); // load our routes and pass in our app and fully configured passport
 var front = require('./routes/index');
 var admin = require('./routes/admin');
 var api = require('./routes/api');

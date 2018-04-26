@@ -1,0 +1,67 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+
+<title>Swahilibox : Admin</title>
+
+<% include ../admin/partials/head.ejs %>
+  </head>
+
+<body>
+<% include ../admin/partials/nav %>
+
+<!--menu bar-->
+ <aside>
+<% include ../admin/partials/sidebar %>
+ </aside>
+
+ <section id="main-content">
+   <section class="wrapper">						
+      <div class="row">
+          <div class="col-md-offset-2 col-md-7 col-sm-12 col-xs-12">
+         <div class="panel panel-default">
+             <div class="panel-heading">
+                 <%= event.title %>
+             </div>
+            <div class="panel panel-body">
+             <div class="event-banner">
+                 <img src="<%= event.banner %>"
+             </div>
+             <div class="">
+                 <span><a href="/admin/event/publish<%= event._id %>"><button class="btn btn-success">PUBLISH</button></a></span>
+                 <span><a href="/admin/event/edit<%= event._id %>"><button class="btn btn-warning">EDIT</button></a></span>
+                 <span><a href="/admin/event/remove<%= event._id %>"><button class="btn btn-danger">DELETE</button></a></span>
+             </div>
+             <div class="">
+                 <div class="col-md-4">
+                     <h4>VENUE: <strong><%= event.venue %></strong></h4>
+                 </div>
+                 <div class="col-md-4">
+                     <h4>START: <strong><%= event.start %></strong></h4>
+                 </div>
+                 <div class="col-md-4">
+                     <h4>END: <strong><%= event.end %></strong></h4>
+                 </div>
+             </div>
+             <div class="">
+                 <p><%= event.description %></p>
+             </div>
+            </div>
+         </div>
+        </div>
+      </div>
+   </section>
+</section>		
+
+<!--content-->
+
+<!-- javascripts -->
+<script>
+  
+        </script>
+
+</body>
+</html>
