@@ -65,8 +65,8 @@ app.get('/front/signup', function (req, res) {
 
 // process the mobile signup form
 app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/profile', // redirect to the secure profile section
-    failureRedirect: '/signup', // redirect back to the signup page if there is an error
+    successRedirect: '/auth/profile', // redirect to the secure profile section
+    failureRedirect: '/auth/signup', // redirect back to the signup page if there is an error
     failureFlash: true // allow flash messages
 }));
 
