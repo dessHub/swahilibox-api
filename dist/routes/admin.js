@@ -66,6 +66,14 @@ app.get('/event:id', isLoggedIn, isAdmin, function (req, res) {
     controller.getEvent(req, res);
 });
 
+app.get('/edit_event:id', isLoggedIn, isAdmin, function (req, res) {
+    controller.getEdit(req, res);
+});
+
+app.post('/edit/event', isLoggedIn, isAdmin, function (req, res) {
+    controller.postEdit(req, res);
+});
+
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
 

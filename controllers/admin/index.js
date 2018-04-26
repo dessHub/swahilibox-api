@@ -57,4 +57,15 @@ controller.getEvent = (req, res) => {
     })
 }
 
+controller.getEdit = (req, res) => {
+    let eventid = req.params.id;
+    Event.findById(eventid, (err, event) => {
+        if(err){
+            res.json(err);
+        }else{
+            res.render('admin/edit', {event: event});
+         }
+    })
+}
+
 module.exports = controller;

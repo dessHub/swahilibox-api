@@ -59,4 +59,15 @@ controller.getEvent = function (req, res) {
     });
 };
 
+controller.getEdit = function (req, res) {
+    var eventid = req.params.id;
+    Event.findById(eventid, function (err, event) {
+        if (err) {
+            res.json(err);
+        } else {
+            res.render('admin/edit', { event: event });
+        }
+    });
+};
+
 module.exports = controller;
