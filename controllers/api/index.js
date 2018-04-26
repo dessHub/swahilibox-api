@@ -54,7 +54,7 @@ controller.rsvp = (req, res) => {
 
             res.json({
                 status: "Success",
-                ticket: ticket.ticketNo
+                ticket: ticket
             })
         }) 
     })
