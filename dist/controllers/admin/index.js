@@ -7,7 +7,11 @@ var Ticket = require('../../models/ticket');
 var controller = {};
 
 controller.index = function (req, res) {
-    res.render('admin/index');
+    Event.find({}, function (err, events) {
+        if (err) throw err;
+
+        res.render('admin/index', { events: events });
+    });
 };
 
 controller.members = function (req, res) {

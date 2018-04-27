@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
 <title>Swahilibox : Admin</title>
@@ -12,66 +12,66 @@
 
       <head>
           <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-      
-      
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
       <title>Swahilibox : Admin</title>
-      
+
       <% include ../admin/partials/head.ejs %>
       <script type="text/javascript">
       $(function() {
         $('.datetimepicker').datetimepicker();
-        
+
         $('.datetimepicker-addon').on('click', function() {
           $(this).prev('input.datetimepicker').data('DateTimePicker').toggle();
         });
       });
       </script>
         </head>
-      
+
       <body>
       <% include ../admin/partials/nav %>
-      
+
       <!--menu bar-->
        <aside>
       <% include ../admin/partials/sidebar %>
        </aside>
-      
+
        <section id="main-content">
-         <section class="wrapper">						
+         <section class="wrapper">
             <div class="row">
-                <div class="col-md-offset-2 col-md-7 col-sm-12 col-xs-12">
+                <div class="col-md-12 col-sm-12 col-xs-12">
                <div class="panel panel-default">
-                  <div class="panel panel-body">
-                             
+                 <div class="panel-heading">
+                   <h3>Edit Event</h3>
+                 </div>
+                  <div class="panel-body">
                           <form action="/admin/edit_event" method="POST">
-                  
                               <div class="form-group">
-                                  <label>EVENT TITLE<span class="required">*</span></label>
+                                  <label>Event Title<span class="required">*</span></label>
                                   <input type="text" name="title" value="<%= event.title %>" class="form-control" placeholder="catchy name">
                                   <input type="hidden" id="avatar-url" name="avatar" value="<%= event.banner %>">
                                   <input type="hidden" id="event_id" name="event_id" value="<%= event._id %>">
                               </div>
-                  
                               <div class="form-group">
-                                  <label>VENUE<span class="required">*</span></label>
+                                  <label>Venue<span class="required">*</span></label>
                                   <input type="text" name="venue"  value="<%= event.venue %>" class="form-control" placeholder="Venue">
                               </div>
-                  
+
                               <div class="form-group">
-                                  <label>ORGANIZER<span class="required">*</span></label>
+                                  <label>Organizer<span class="required">*</span></label>
                                   <input type="text" name="organiser" value="<%= event.organiser %>" class="form-control" placeholder="ORGANIZER">
                               </div>
-               
+
                               <div class="" style="margin-bottom: 5px;">
                                 <input type="file" id="file-input">
                                 <p id="status">Please select a file</p>
-                                <img style="border:1px solid gray;width:300px;height: 100px;"  id="preview" src="<%= event.banner %>">
+                                <img class="img img-responsive img-thumbnail" style="width:300px;height: 200px;display:block;overflow:hidden;"  id="preview" src="<%= event.banner %>">
                               </div>
-                  
+
                               <div class="form-group">
                                   <div class="col-md-6 col-xs-12">
-                                   <label>START<span class="required">*</span></label>
+                                   <label>Start<span class="required">*</span></label>
                                    <div class='input-group date'>
                                     <input type='text' name="start" value="<%= event.start %>" class="form-control datetimepicker" placeholder="<%= event.start %>"/>
                                     <span class="input-group-addon datetimepicker-addon">
@@ -80,7 +80,7 @@
                                   </div>
                                   </div>
                                   <div class="col-md-6 col-xs-12">
-                                   <label>END<span class="required">*</span></label>
+                                   <label>End<span class="required">*</span></label>
                                    <div class='input-group date'>
                                     <input type='text' name="end" value="<%= event.end %>" class="form-control datetimepicker" placeholder="<%= event.end %>" />
                                     <span class="input-group-addon datetimepicker-addon">
@@ -88,27 +88,24 @@
                                     </span>
                                   </div>
                                   </div>
-                              </div>  
-                              
+                              </div>
                               <div class="form-group">
-                                  <label>DESCRIPTION<span class="required">*</span></label>
+                                  <label>Description<span class="required">*</span></label>
                                   <textarea name="description" rows="2" class="form-control"> <%= event.description %></textarea>
                               </div>
-                              
                               <div class="form-group">
-                                  <button type="submit" class="btn btn-success btn-lg">UPDATE</button>
+                                  <button type="submit" class="btn btn-success btn-lg">Update</button>
                               </div>
-                              
                           </form>
                   </div>
                </div>
               </div>
             </div>
          </section>
-      </section>		
-      
+      </section>
+
       <!--content-->
-      
+
       <!-- javascripts -->
       <script>
               /*
@@ -169,9 +166,8 @@
               (() => {
                   document.getElementById('file-input').onchange = initUpload;
               })();
-      
+
                </script>
-      
+
       </body>
       </html>
-      

@@ -8,44 +8,41 @@
     <div id="app">
 
         <div class="top-events">
-            <h2>SIGNUP</h2>
+            <!--<h2>SIGNUP</h2>-->
            </div>
-         
-           <div class="events">
+
+           <div class="events" style="background-color:rgb(243, 243, 243);margin: 0px;padding-top: 10px;">
              <div class="container">
               <div class="row">
-                <div class="col-md-offset-2 col-md-6 col-xs-12">
-
-                    <div class="" style="border-style: ridge;background:#e8e9ea; padding-left: 20px; padding-right: 20px;">
-
-                        <h1 style="margin-bottom:20px;"><span class="fa fa-user"></span> Signup</h1>
-
-                        <!-- show any messages that come back with authentication -->
-                        <% if (message.length > 0) { %>
-                            <div class="alert alert-danger"><%= message %></div>
-                        <% } %>
-                    
-                        <!-- LOGIN FORM -->
-                        <form action="/auth/front/signup" method="post">
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="text" class="form-control" name="email">
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control" name="password">
-                            </div>
-                    
-                            <button type="submit" class="btn btn-warning btn-lg">Signup</button>
-                        </form>
-                    
-                        <hr>
-                    
-                        <p>Already have an account? <a href="/auth/front/login">Login</a></p>
-                        <p>Or go <a href="/">home</a>.</p>
-                    
+                <div class="col-md-offset-4 col-md-4 col-xs-12">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h3 style="margin-bottom:20px;"><span class="fa fa-user"></span> Signup</h3>
                     </div>
-         
+                    <div class="panel-body">
+                      <div>
+                          <!-- show any messages that come back with authentication -->
+                          <% if (message.length > 0) { %>
+                              <div class="alert alert-danger"><%= message %></div>
+                          <% } %>
+                          <!-- LOGIN FORM -->
+                          <form action="/auth/front/signup" method="post">
+                              <div class="form-group">
+                                  <label class="pull-left">Email</label>
+                                  <input type="text" class="form-control" name="email" placeholder="Your Email" required>
+                              </div>
+                              <div class="form-group">
+                                  <label class="pull-left">Password</label>
+                                  <input type="password" class="form-control" name="password" placeholder="Your Password" required>
+                              </div>
+                              <button type="submit" class="btn btn-warning btn-lg btn-block">Signup</button>
+                          </form>
+                          <hr>
+                          <p>Already have an account? <a href="/auth/front/login">Login</a></p>
+                          <!--<p>Or go <a href="/">home</a>.</p>-->
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
              </div>

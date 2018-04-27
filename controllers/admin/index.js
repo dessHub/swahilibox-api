@@ -5,7 +5,11 @@ const Ticket  = require('../../models/ticket');
 let controller = {};
 
 controller.index = (req, res) => {
-    res.render('admin/index');
+    Event.find({}, (err, events) => {
+        if(err) throw err;
+
+        res.render('admin/index', {events: events});
+    })
 }
 
 controller.members = (req, res) => {
@@ -85,7 +89,7 @@ controller.postEdit = (req, res) => {
         if(err) throw err;
         let red_to = "/admin/event" + id ;
         console.log(red_to);
-        res.redirect(red_to);     
+        res.redirect(red_to);
          })
      })
 }
