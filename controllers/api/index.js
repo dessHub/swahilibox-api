@@ -43,7 +43,7 @@ controller.rsvp = (req, res) => {
         if(err) throw err;
         if(ticket.length != 0){
             res.json({
-                status: "Success",
+                status: "Already",
                 message: "Email already has a ticket",
                 ticket: ticket
             })
