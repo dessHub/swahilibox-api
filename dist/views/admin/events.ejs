@@ -37,10 +37,11 @@
                   <strong>Venue: <%= events[i].venue %>.</strong></br>
                   <strong>Start:<%= events[i].start %></strong></br>
                   <strong>End: <%= events[i].end %></strong></br>
-                  <strong>Organiser: <%= events[i].organiser %><%= events[i]._id %></strong>
+                  <strong>Organiser: <%= events[i].organiser %></strong>
                 </div>
-                <a href="/admin/event<%= events[i]._id %>" class="button">VIEW</a>
-                <a href="/admin/event_delete<%= events[i]._id %>" class="button">DELETE</a>
+                <a href="/admin/event<%= events[i]._id %>"><button class="btn btn-info">VIEW</button></a>
+                <a href="/admin/cancel_event<%= events[i]._id %>" ><button class="btn btn-warning">CANCEL</button></a>
+                <a href="/admin/delete_event<%= events[i]._id %>" ><button class="btn btn-danger">DELETE</button></a>
                 </div><!--/ .buttons -->             	
               </div><!--/.info-box-->			
             </div>

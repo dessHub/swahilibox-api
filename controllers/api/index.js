@@ -45,7 +45,7 @@ controller.rsvp = (req, res) => {
             res.json({
                 status: "Already",
                 message: "Email already has a ticket",
-                ticket: ticket
+                ticket: ticket.randomno
             })
         }else{
             Event.findById(event_id, (err, event) => {
@@ -60,13 +60,14 @@ controller.rsvp = (req, res) => {
                ticket.venue = event.venue;
                ticket.organiser = event.organiser;
                ticket.ticketNo = randomno;
+               ticket.banner = event.banner;
        
                ticket.save((err, ticket) => {
                    if(err) throw err;
        
                    res.json({
                        status: "Success",
-                       ticket: ticket
+                       ticket: randomno
                    })
                }) 
            })

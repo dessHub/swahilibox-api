@@ -11,7 +11,8 @@ let ticketSchema = mongoose.Schema({
     start    : String,
     end      : String,
     venue    : String,
-    organiser: String
+    organiser: String,
+    banner   : String
 
 }, {
     timestamps: true

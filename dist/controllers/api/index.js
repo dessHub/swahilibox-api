@@ -7,7 +7,7 @@ var Ticket = require('../../models/ticket');
 var controller = {};
 
 controller.getEvents = function (req, res) {
-    Event.find({ "Status": "Active" }, function (error, events) {
+    Event.find({ "status": "Active" }, function (error, events) {
         if (error) {
             res.json({
                 status: "Error",
@@ -22,7 +22,7 @@ controller.getEvents = function (req, res) {
 controller.getPast = function (req, res) {
     Event.find({ "status": "Archived" }, function (error, events) {
         if (error) {
-            res.jsond({
+            res.json({
                 status: "Error",
                 message: error
             });
@@ -45,9 +45,9 @@ controller.rsvp = function (req, res) {
         if (err) throw err;
         if (ticket.length != 0) {
             res.json({
-                status: "Success",
+                status: "Already",
                 message: "Email already has a ticket",
-                ticket: ticket
+                ticket: ticket.randomno
             });
         } else {
             Event.findById(event_id, function (err, event) {
@@ -62,13 +62,14 @@ controller.rsvp = function (req, res) {
                 ticket.venue = event.venue;
                 ticket.organiser = event.organiser;
                 ticket.ticketNo = randomno;
+                ticket.banner = event.banner;
 
                 ticket.save(function (err, ticket) {
                     if (err) throw err;
 
                     res.json({
                         status: "Success",
-                        ticket: ticket
+                        ticket: randomno
                     });
                 });
             });
