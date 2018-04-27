@@ -31,9 +31,13 @@
                  <img src="<%= event.banner %>" class="img-responsive">
              </div>
              <div class="">
+                 <% if( event.status == "Notactive") { %>
                  <span><a href="/admin/publish_event<%= event._id %>"><button class="btn btn-success">PUBLISH</button></a></span>
+                 <% }else if(event.status == "Active") { %>
+                    <span><a href="/admin/archive_event<%= event._id %>"><button class="btn btn-success">ARCHIVE</button></a></span>
+                 <% } %>
                  <span><a href="/admin/edit_event<%= event._id %>"><button class="btn btn-warning">EDIT</button></a></span>
-                 <span><a href="/admin/event/remove<%= event._id %>"><button class="btn btn-danger">DELETE</button></a></span>
+                 <span><a href="/admin/delete_event<%= event._id %>"><button class="btn btn-danger">DELETE</button></a></span>
              </div>
              <div class="">
                  <div class="col-md-4">

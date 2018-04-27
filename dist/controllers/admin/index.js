@@ -15,10 +15,12 @@ controller.members = function (req, res) {
 };
 
 controller.getEvents = function (req, res) {
+    console.log(Date());
+    var currentDate = Date();
     Event.find({}, function (err, events) {
         if (err) throw err;
 
-        res.render('admin/events', { events: events });
+        res.render('admin/events', { events: events, currentDate: currentDate });
     });
 };
 
@@ -32,12 +34,12 @@ controller.addEvent = function (req, res) {
     event.title = req.body.title;
     event.venue = req.body.venue;;
     event.description = req.body.description;
-    event.start = req.body.start;;
+    event.start = req.body.start;
     event.end = req.body.end;
     event.banner = req.body.avatar;
-    event.status = "Active";
+    event.status = "Notactive";
     event.organiser = req.body.organiser;
-    console.log(event);
+
     event.save(function (err, event) {
         if (err) {
             res.json(err);
@@ -82,13 +84,60 @@ controller.postEdit = function (req, res) {
         event.banner = req.body.avatar;
         event.status = event.status;
         event.organiser = req.body.organiser;
-        console.log(event);
         event.save(function (err) {
             if (err) throw err;
             var red_to = "/admin/event" + id;
-            console.log(red_to);
             res.redirect(red_to);
         });
+    });
+};
+
+controller.publish = function (req, res) {
+    var id = req.params.id;
+    Event.findById(id, function (err, event) {
+        if (err) throw err;
+        event.status = "Active";
+        event.save(function (err) {
+            if (err) throw err;
+            var red_to = "/admin/event" + id;
+            res.redirect(red_to);
+        });
+    });
+};
+
+controller.cancel = function (req, res) {
+    var id = req.params.id;
+    Event.findById(id, function (err, event) {
+        if (err) throw err;
+        event.status = "Cancelled";
+        event.save(function (err) {
+            if (err) throw err;
+            var red_to = "/admin/event" + id;
+            res.redirect(red_to);
+        });
+    });
+};
+
+controller.archives = function (req, res) {
+    var id = req.params.id;
+    console.log(id);
+    Event.findById(id, function (err, event) {
+        if (err) throw err;
+        console.log(event);
+        event.update({ "status": "Archived" }, function (err) {
+            if (err) throw err;
+            var red_to = "/admin/event" + id;
+            res.redirect(red_to);
+        });
+    });
+};
+
+controller.remove = function (req, res) {
+    var id = req.params.id;
+    console.log(id);
+    Event.remove({ _id: id }, function (err) {
+
+        res.redirect('/admin/events');
     });
 };
 

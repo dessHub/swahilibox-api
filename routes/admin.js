@@ -46,6 +46,22 @@ app.post('/edit_event', isLoggedIn,isAdmin, (req, res) => {
     controller.postEdit(req, res);
 })
 
+app.get('/publish_event:id', isLoggedIn,isAdmin, (req, res) => {
+    controller.publish(req, res);
+})
+
+app.get('/cancel_event:id', isLoggedIn,isAdmin, (req, res) => {
+    controller.cancel(req, res);
+})
+
+app.get('/archive_event:id', isLoggedIn,isAdmin, (req, res) => {
+    controller.archives(req, res);
+})
+
+app.get('/delete_event:id', isLoggedIn,isAdmin, (req, res) => {
+    controller.remove(req, res);
+})
+
 app.get('/sign-s3', (req, res) => {
     const s3 = new aws.S3();
     const fileName = req.query['file-name'];

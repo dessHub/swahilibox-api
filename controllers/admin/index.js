@@ -13,10 +13,12 @@ controller.members = (req, res) => {
 }
 
 controller.getEvents = (req, res) => {
+    console.log(Date());
+    let currentDate = Date();
     Event.find({}, (err, events) => {
         if(err) throw err;
 
-        res.render('admin/events', {events: events});
+        res.render('admin/events', {events: events,currentDate:currentDate});
     })
 }
 
@@ -30,12 +32,12 @@ controller.addEvent = (req, res) => {
     event.title =  req.body.title;
     event.venue =  req.body.venue;;
     event.description  =  req.body.description;
-    event.start  =  req.body.start;;
+    event.start  =  req.body.start;
     event.end  =  req.body.end;
     event.banner = req.body.avatar
-    event.status = "Active";
+    event.status = "Notactive";
     event.organiser = req.body.organiser;
-    console.log(event);
+
     event.save((err, event) => {
         if(err){
             res.json(err);
@@ -80,14 +82,63 @@ controller.postEdit = (req, res) => {
         event.banner = req.body.avatar
         event.status = event.status;
         event.organiser = req.body.organiser;
-        console.log(event);
         event.save((err) => {
         if(err) throw err;
         let red_to = "/admin/event" + id ;
-        console.log(red_to);
         res.redirect(red_to);     
          })
      })
 }
+
+controller.publish = (req, res) => {
+    let id = req.params.id;
+    Event.findById(id, (err, event) => {
+        if(err) throw err;
+        event.status = "Active";
+        event.save((err) => {
+            if(err) throw err;
+            let red_to = "/admin/event" + id ;
+            res.redirect(red_to);
+        })
+    })
+}
+
+controller.cancel = (req, res) => {
+    let id = req.params.id;
+    Event.findById(id, (err, event) => {
+        if(err) throw err;
+        event.status = "Cancelled";
+        event.save((err) => {
+            if(err) throw err;
+            let red_to = "/admin/event" + id ;
+            res.redirect(red_to);
+        })
+    })
+}
+
+controller.archives = (req, res) => {
+    let id = req.params.id;
+    console.log(id);
+    Event.findById(id, (err, event) => {
+        if(err) throw err;
+        console.log(event);
+        event.update({"status":"Archived"}, (err) => {
+            if(err) throw err;
+            let red_to = "/admin/event" + id ;
+            res.redirect(red_to);
+        })
+    })
+}
+
+controller.remove = (req, res) => {
+    let id = req.params.id;
+    console.log(id);
+    Event.remove({_id: id}, (err) => {
+        
+        res.redirect('/admin/events');
+    })
+}
+
+
 
 module.exports = controller;

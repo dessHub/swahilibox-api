@@ -1,38 +1,5 @@
-<<<<<<< HEAD
-# es6express-starter
 
-Express boilerplate for creating MVC express projects.
-Dependencies include: 
-  * mongoose
-  * Express
-  * Morgan
-  * babel-cli
-  
-  ## Installation
-  
-  Clone the repository and install dependencies with npm install:
-  
-     git clone https://github.com/dessHub/es6express-starter.git
-     npm install
-     
- ## Set Up
- 
-  Copy .env-example to .env file and update with your your variables
-  
-## Starting the server
-
-      npm start
-    
-    This would convert es6 features to es5 and start the server
-    
-## Contribution 
-
-   If there is any issue create issue . 
-   And if your want to contribute fork, update and create a pull request.
-    
-=======
-# Swahilibox Platform
-
+# SHAWILIBOX PLATFORM
 
 # Endpoints
 
@@ -57,5 +24,36 @@ Dependencies include:
    6. GET /admin/tickets/event:id
    7. GET /admin/users
 
+## Dependencies include: 
+  * MongoDB
+  * Express JS
+  * NODE JS
+  * Babel-cli
+  
+  ## Installation
+  
+  Clone the repository and install dependencies with npm install:
+  
+     git clone https://github.com/dessHub/swahilibox-api.git
+     npm install
+     
+ ## Set Up
+ 
+  Copy .env-example to .env file and update with your your variables
+  
+## Starting the server
 
->>>>>>> 71339de0c80cefcb3f3de1403ae61821653d7ea4
+      npm start
+    
+    This would convert es6 features to es5 and start the server
+    
+## Contribution 
+
+   If there is any issue create issue . 
+   And if your want to contribute fork, update and create a pull request.
+    
+
+
+
+
+

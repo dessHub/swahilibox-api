@@ -27,6 +27,7 @@
             <a href="/admin/create"><button id="" class="final-button">Create new event</button></a>
           <div class="row">
             <% for(let i=0;i<events.length;i++) { %>
+              
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
               <div class="info-box white-bg">
                 <div class="panel-body">
@@ -36,14 +37,15 @@
                   <strong>Venue: <%= events[i].venue %>.</strong></br>
                   <strong>Start:<%= events[i].start %></strong></br>
                   <strong>End: <%= events[i].end %></strong></br>
-                  <strong>Organiser: <%= events[i].organiser %></strong>
+                  <strong>Organiser: <%= events[i].organiser %><%= events[i]._id %></strong>
                 </div>
                 <a href="/admin/event<%= events[i]._id %>" class="button">VIEW</a>
-                <a href="/admin/event/delete<%= events[i].title %>" class="button">DELETE</a>
+                <a href="/admin/event_delete<%= events[i]._id %>" class="button">DELETE</a>
                 </div><!--/ .buttons -->             	
               </div><!--/.info-box-->			
             </div>
-            <% } %>
+            
+            <% } %>  
  	
           </div><!--/.row-->
 
