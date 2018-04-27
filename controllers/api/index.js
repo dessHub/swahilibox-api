@@ -5,7 +5,7 @@ const Ticket  = require('../../models/ticket');
 let controller = {};
 
 controller.getEvents = (req, res) => {
-    Event.find({"Status":"Active"}, (error, events) => {
+    Event.find({"status":"Active"}, (error, events) => {
         if(error){
             res.json({
                 status: "Error",
@@ -20,7 +20,7 @@ controller.getEvents = (req, res) => {
 controller.getPast = (req, res) => {
     Event.find({"status": "Archived"}, (error, events) => {
         if(error){
-            res.jsond({
+            res.json({
                 status: "Error",
                 message: error
             });
