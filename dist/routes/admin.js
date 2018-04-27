@@ -64,6 +64,14 @@ app.get('/delete_event:id', isLoggedIn, isAdmin, function (req, res) {
     controller.remove(req, res);
 });
 
+app.get('/role:email/:role', isLoggedIn, isAdmin, function (req, res) {
+    controller.changerole(req, res);
+});
+
+app.get('/user_remove:id', isLoggedIn, isAdmin, function (req, res) {
+    controller.userremove(req, res);
+});
+
 app.get('/sign-s3', function (req, res) {
     var s3 = new aws.S3();
     var fileName = req.query['file-name'];

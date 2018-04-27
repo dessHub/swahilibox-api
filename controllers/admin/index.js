@@ -5,11 +5,29 @@ const Ticket  = require('../../models/ticket');
 let controller = {};
 
 controller.index = (req, res) => {
-    res.render('admin/index');
+
+    Event.count({"status":"Active"}, (err, active) => {
+        if(err) throw err;
+
+        Event.count({"status":"Archived"}, (err, past) => {
+            if(err) throw err;
+    
+            User.count({}, (err, users) => {
+                if(err) throw err;
+
+                res.render('admin/index', {past: past,active:active,users:users}); 
+            })
+        })  
+    })
+    
 }
 
 controller.members = (req, res) => {
-    res.render('admin/members');
+    User.find({}, (err, users) => {
+        if(err) throw err;
+
+        res.render('admin/members', {users:users});
+    })    
 }
 
 controller.getEvents = (req, res) => {
@@ -54,7 +72,12 @@ controller.getEvent = (req, res) => {
         if(err){
             res.json(err);
         }else{
-            res.render('admin/event', {event: event});
+            Ticket.find({"eventId":eventid}, (err, tickets) => {
+                if(err) throw err;
+                console.log(tickets);
+                res.render('admin/event', {event: event, tickets:tickets});
+            })
+            
          }
     })
 }
@@ -139,6 +162,34 @@ controller.remove = (req, res) => {
     })
 }
 
+controller.changerole = (req, res) => {
+    var role = req.params.role;
+    var email = req.params.email;
+      console.log(email);
+    User.getUserByUsername(email, (err, user) => {
+        if(err) return err;
+        console.log(user);
+          if(user){
+            
+              user.update({"local.role":role}, (err, user) => {
+                if(err) return(err)
+                  res.redirect('/');
+              });
+             
+          }else{
+            res.send("user does not exist");
+        }
+    });
+}
+
+controller.userremove = (req, res) => {
+    let id = req.params.id;
+    console.log(id);
+    User.remove({_id: id}, (err) => {
+        
+        res.redirect('/admin/members');
+    })
+}
 
 
 module.exports = controller;

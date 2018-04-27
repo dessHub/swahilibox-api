@@ -7,11 +7,28 @@ var Ticket = require('../../models/ticket');
 var controller = {};
 
 controller.index = function (req, res) {
-    res.render('admin/index');
+
+    Event.count({ "status": "Active" }, function (err, active) {
+        if (err) throw err;
+
+        Event.count({ "status": "Archived" }, function (err, past) {
+            if (err) throw err;
+
+            User.count({}, function (err, users) {
+                if (err) throw err;
+
+                res.render('admin/index', { past: past, active: active, users: users });
+            });
+        });
+    });
 };
 
 controller.members = function (req, res) {
-    res.render('admin/members');
+    User.find({}, function (err, users) {
+        if (err) throw err;
+
+        res.render('admin/members', { users: users });
+    });
 };
 
 controller.getEvents = function (req, res) {
@@ -56,7 +73,11 @@ controller.getEvent = function (req, res) {
         if (err) {
             res.json(err);
         } else {
-            res.render('admin/event', { event: event });
+            Ticket.find({ "eventId": eventid }, function (err, tickets) {
+                if (err) throw err;
+                console.log(tickets);
+                res.render('admin/event', { event: event, tickets: tickets });
+            });
         }
     });
 };
@@ -138,6 +159,34 @@ controller.remove = function (req, res) {
     Event.remove({ _id: id }, function (err) {
 
         res.redirect('/admin/events');
+    });
+};
+
+controller.changerole = function (req, res) {
+    var role = req.params.role;
+    var email = req.params.email;
+    console.log(email);
+    User.getUserByUsername(email, function (err, user) {
+        if (err) return err;
+        console.log(user);
+        if (user) {
+
+            user.update({ "local.role": role }, function (err, user) {
+                if (err) return err;
+                res.redirect('/');
+            });
+        } else {
+            res.send("user does not exist");
+        }
+    });
+};
+
+controller.userremove = function (req, res) {
+    var id = req.params.id;
+    console.log(id);
+    User.remove({ _id: id }, function (err) {
+
+        res.redirect('/admin/members');
     });
 };
 
