@@ -32,6 +32,22 @@ app.get('/create', isLoggedIn, isAdmin, function (req, res) {
     controller.getCreate(req, res);
 });
 
+app.post('/create', isLoggedIn, isAdmin, function (req, res) {
+    controller.addEvent(req, res);
+});
+
+app.get('/event:id', isLoggedIn, isAdmin, function (req, res) {
+    controller.getEvent(req, res);
+});
+
+app.get('/edit_event:id', isLoggedIn, isAdmin, function (req, res) {
+    controller.getEdit(req, res);
+});
+
+app.post('/edit_event', isLoggedIn, isAdmin, function (req, res) {
+    controller.postEdit(req, res);
+});
+
 app.get('/sign-s3', function (req, res) {
     var s3 = new aws.S3();
     var fileName = req.query['file-name'];
@@ -56,22 +72,6 @@ app.get('/sign-s3', function (req, res) {
         res.write(JSON.stringify(returnData));
         res.end();
     });
-});
-
-app.post('/create', isLoggedIn, isAdmin, function (req, res) {
-    controller.addEvent(req, res);
-});
-
-app.get('/event:id', isLoggedIn, isAdmin, function (req, res) {
-    controller.getEvent(req, res);
-});
-
-app.get('/edit_event:id', isLoggedIn, isAdmin, function (req, res) {
-    controller.getEdit(req, res);
-});
-
-app.post('/edit/event', isLoggedIn, isAdmin, function (req, res) {
-    controller.postEdit(req, res);
 });
 
 // route middleware to make sure a user is logged in

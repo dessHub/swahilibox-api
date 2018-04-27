@@ -40,7 +40,7 @@ controller.addEvent = (req, res) => {
         if(err){
             res.json(err);
         } else {
-            let red = "'/admin/event" + event._id + "'";
+            let red = "/admin/event" + event._id ;
         res.redirect(red)
       }
     });
@@ -81,9 +81,9 @@ controller.postEdit = (req, res) => {
         event.status = event.status;
         event.organiser = req.body.organiser;
         console.log(event);
-        event.save(function(err){
+        event.save((err) => {
         if(err) throw err;
-        let red_to = "'/admin/event" + id + "'";
+        let red_to = "/admin/event" + id ;
         console.log(red_to);
         res.redirect(red_to);     
          })

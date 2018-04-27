@@ -42,7 +42,7 @@ controller.addEvent = function (req, res) {
         if (err) {
             res.json(err);
         } else {
-            var red = "'/admin/event" + event._id + "'";
+            var red = "/admin/event" + event._id;
             res.redirect(red);
         }
     });
@@ -85,7 +85,7 @@ controller.postEdit = function (req, res) {
         console.log(event);
         event.save(function (err) {
             if (err) throw err;
-            var red_to = "'/admin/event" + id + "'";
+            var red_to = "/admin/event" + id;
             console.log(red_to);
             res.redirect(red_to);
         });
