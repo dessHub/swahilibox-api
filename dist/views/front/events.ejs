@@ -19,24 +19,34 @@
                    <div class="jumbotron text-center">There are no events at the moment</div>
                   <% }else{ %>
                  <% for(let i = 0;i<events.length; i++) { %>
-                 <div class="event">
+                 <div class="event" style="margin: 5px; height:auto;">
                  <div class="col-md-12 col-xs-12">
                   <div class="col-md-offset-1 col-md-4 col-xs-12">
                     <div class="event-img">
-                     <img class="img-responsive" src="<%= events[i].banner %>">
+                     <img class="img-responsive" src="<%= events[i].banner %>" style="height:30vh; width: 100%;">
                     </div>
                   </div>
                   <div class="col-md-5 col-md-12">
                    <div class="event-cont">
                     <h3><%= events[i].title %></h3>
-                    <p><%= events[i].description %> </p>          <span><strong><%= events[i].start %></strong></span>
+                    <p><%= events[i].description %> </p> 
+                    <div >
+                      <h5>VENUE: <strong> <%= events[i].venue %></strong> </h5>
+                      <h5>ORGANISED BY: <strong> <%= events[i].organiser %></strong> </h5>
+                    </div> 
+                    <div>        
+                    <span>START: <strong><%= events[i].start %></strong></span>
+                    <span> - </span>
+                    <span>END: <strong><%= events[i].end %></strong></span>
+                  </div>
                     <div class="event-rsvp">
-                     <a href="/front/rsvp<%= events[i]._id %>"><button class="btn btn-default">RSVP</button></a>
+                     <a href="/rsvp<%= events[i]._id %>"><button class="btn btn-default">RSVP</button></a>
                     </div>
                    </div>
                   </div>
                   </div>
                  </div>
+                 
                  <% } %>
                  <% } %>
                  

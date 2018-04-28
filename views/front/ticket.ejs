@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <% include ../partials/head.ejs %>
+  </head>
+  <body >
+    <% include ../partials/nav.ejs %>
+    <div id="app">
+
+        <div class="top-events">
+            <h2>TICKET</h2>
+           </div>
+         
+           <div class="events">
+             <div class="container">
+              <div class="row">
+                <div class="col-md-offset-2 col-md-8 col-xs-12">
+                              
+                            <div class="event" style="margin: 5px; height:auto; border-style: ridge;background:#e8e9ea; padding-left: 20px; padding-right: 20px;">
+                               <div class="">
+                                <div class="col-md-7 col-xs-12">
+                                  <div class="event-img">
+                                   <img class="img-responsive" src="<%= ticket.banner %>" style="height:30vh; width: auto;">
+                                  </div>
+                                </div>
+                                <div class="col-md-5 col-xs-12">
+                                  <div class="">
+                                   <div class=""><h3><%= ticket.title %></h3></div>
+                                   <p>By <%= ticket.organiser %></p>
+                                   <h4><strong>DATE AND TIME</strong></h4>
+                                   <span>START: <strong><%= ticket.start %></strong></span>
+                                   <span> - </span>
+                                   <span>END: <strong><%= ticket.end %></strong></span>
+                                   <p>VENUE: <strong><%= ticket.venue %></strong></p>
+                                  </div>
+                                </div>
+                                <div class="" style="margin-top: 10px;">
+                                  <div class="" style="background-color: gainsboro">TICKET NO: <strong><%= ticket.ticketNo %></strong></div>
+                                    
+                                 <div class="event-cont" style="margin-top: 10px;">
+                                  <p><%= event.description %> </p> 
+                                  <div >
+                                  </div> 
+                                  <div>        
+
+                                  </div>
+                                 </div>
+                                </div>
+                               </div>
+                            </div>
+                           
+                        </div>
+              </div>
+             </div>
+           </div>
+
+    </div>
+    <% include ../partials/footer.ejs %>
+  </body>
+</html>

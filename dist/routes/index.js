@@ -24,8 +24,16 @@ app.get('/services', function (req, res) {
     controller.services(req, res);
 });
 
+app.get('/rsvp:id', function (req, res) {
+    controller.getrsvp(req, res);
+});
+
 app.post('/rsvp', function (req, res) {
     controller.rsvp(req, res);
+});
+
+app.get('/ticket:id/:email', function (req, res) {
+    controller.getticket(req, res);
 });
 
 module.exports = app;

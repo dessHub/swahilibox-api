@@ -7,22 +7,37 @@ var Ticket = require('../../models/ticket');
 var controller = {};
 
 controller.index = function (req, res) {
-    Event.find({}, function (err, events) {
+
+    Event.count({ "status": "Active" }, function (err, active) {
         if (err) throw err;
 
-        res.render('admin/index', { events: events });
+        Event.count({ "status": "Archived" }, function (err, past) {
+            if (err) throw err;
+
+            User.count({}, function (err, users) {
+                if (err) throw err;
+
+                res.render('admin/index', { past: past, active: active, users: users });
+            });
+        });
     });
 };
 
 controller.members = function (req, res) {
-    res.render('admin/members');
+    User.find({}, function (err, users) {
+        if (err) throw err;
+
+        res.render('admin/members', { users: users });
+    });
 };
 
 controller.getEvents = function (req, res) {
+    console.log(Date());
+    var currentDate = Date();
     Event.find({}, function (err, events) {
         if (err) throw err;
 
-        res.render('admin/events', { events: events });
+        res.render('admin/events', { events: events, currentDate: currentDate });
     });
 };
 
@@ -36,12 +51,12 @@ controller.addEvent = function (req, res) {
     event.title = req.body.title;
     event.venue = req.body.venue;;
     event.description = req.body.description;
-    event.start = req.body.start;;
+    event.start = req.body.start;
     event.end = req.body.end;
     event.banner = req.body.avatar;
-    event.status = "Active";
+    event.status = "Notactive";
     event.organiser = req.body.organiser;
-    console.log(event);
+
     event.save(function (err, event) {
         if (err) {
             res.json(err);
@@ -58,7 +73,11 @@ controller.getEvent = function (req, res) {
         if (err) {
             res.json(err);
         } else {
-            res.render('admin/event', { event: event });
+            Ticket.find({ "eventId": eventid }, function (err, tickets) {
+                if (err) throw err;
+                console.log(tickets);
+                res.render('admin/event', { event: event, tickets: tickets });
+            });
         }
     });
 };
@@ -86,13 +105,88 @@ controller.postEdit = function (req, res) {
         event.banner = req.body.avatar;
         event.status = event.status;
         event.organiser = req.body.organiser;
-        console.log(event);
         event.save(function (err) {
             if (err) throw err;
             var red_to = "/admin/event" + id;
-            console.log(red_to);
             res.redirect(red_to);
         });
+    });
+};
+
+controller.publish = function (req, res) {
+    var id = req.params.id;
+    Event.findById(id, function (err, event) {
+        if (err) throw err;
+        event.status = "Active";
+        event.save(function (err) {
+            if (err) throw err;
+            var red_to = "/admin/event" + id;
+            res.redirect(red_to);
+        });
+    });
+};
+
+controller.cancel = function (req, res) {
+    var id = req.params.id;
+    Event.findById(id, function (err, event) {
+        if (err) throw err;
+        event.status = "Cancelled";
+        event.save(function (err) {
+            if (err) throw err;
+            var red_to = "/admin/event" + id;
+            res.redirect(red_to);
+        });
+    });
+};
+
+controller.archives = function (req, res) {
+    var id = req.params.id;
+    console.log(id);
+    Event.findById(id, function (err, event) {
+        if (err) throw err;
+        console.log(event);
+        event.update({ "status": "Archived" }, function (err) {
+            if (err) throw err;
+            var red_to = "/admin/event" + id;
+            res.redirect(red_to);
+        });
+    });
+};
+
+controller.remove = function (req, res) {
+    var id = req.params.id;
+    console.log(id);
+    Event.remove({ _id: id }, function (err) {
+
+        res.redirect('/admin/events');
+    });
+};
+
+controller.changerole = function (req, res) {
+    var role = req.params.role;
+    var email = req.params.email;
+    console.log(email);
+    User.getUserByUsername(email, function (err, user) {
+        if (err) return err;
+        console.log(user);
+        if (user) {
+
+            user.update({ "local.role": role }, function (err, user) {
+                if (err) return err;
+                res.redirect('/');
+            });
+        } else {
+            res.send("user does not exist");
+        }
+    });
+};
+
+controller.userremove = function (req, res) {
+    var id = req.params.id;
+    console.log(id);
+    User.remove({ _id: id }, function (err) {
+
+        res.redirect('/admin/members');
     });
 };
 

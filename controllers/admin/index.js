@@ -5,22 +5,38 @@ const Ticket  = require('../../models/ticket');
 let controller = {};
 
 controller.index = (req, res) => {
-    Event.find({}, (err, events) => {
+
+    Event.count({"status":"Active"}, (err, active) => {
         if(err) throw err;
 
-        res.render('admin/index', {events: events});
+        Event.count({"status":"Archived"}, (err, past) => {
+            if(err) throw err;
+    
+            User.count({}, (err, users) => {
+                if(err) throw err;
+
+                res.render('admin/index', {past: past,active:active,users:users}); 
+            })
+        })  
     })
+    
 }
 
 controller.members = (req, res) => {
-    res.render('admin/members');
+    User.find({}, (err, users) => {
+        if(err) throw err;
+
+        res.render('admin/members', {users:users});
+    })    
 }
 
 controller.getEvents = (req, res) => {
+    console.log(Date());
+    let currentDate = Date();
     Event.find({}, (err, events) => {
         if(err) throw err;
 
-        res.render('admin/events', {events: events});
+        res.render('admin/events', {events: events,currentDate:currentDate});
     })
 }
 
@@ -34,12 +50,12 @@ controller.addEvent = (req, res) => {
     event.title =  req.body.title;
     event.venue =  req.body.venue;;
     event.description  =  req.body.description;
-    event.start  =  req.body.start;;
+    event.start  =  req.body.start;
     event.end  =  req.body.end;
     event.banner = req.body.avatar
-    event.status = "Active";
+    event.status = "Notactive";
     event.organiser = req.body.organiser;
-    console.log(event);
+
     event.save((err, event) => {
         if(err){
             res.json(err);
@@ -56,7 +72,12 @@ controller.getEvent = (req, res) => {
         if(err){
             res.json(err);
         }else{
-            res.render('admin/event', {event: event});
+            Ticket.find({"eventId":eventid}, (err, tickets) => {
+                if(err) throw err;
+                console.log(tickets);
+                res.render('admin/event', {event: event, tickets:tickets});
+            })
+            
          }
     })
 }
@@ -84,14 +105,92 @@ controller.postEdit = (req, res) => {
         event.banner = req.body.avatar
         event.status = event.status;
         event.organiser = req.body.organiser;
-        console.log(event);
         event.save((err) => {
         if(err) throw err;
         let red_to = "/admin/event" + id ;
-        console.log(red_to);
-        res.redirect(red_to);
+        res.redirect(red_to);     
          })
      })
 }
 
+controller.publish = (req, res) => {
+    let id = req.params.id;
+    Event.findById(id, (err, event) => {
+        if(err) throw err;
+        event.status = "Active";
+        event.save((err) => {
+            if(err) throw err;
+            let red_to = "/admin/event" + id ;
+            res.redirect(red_to);
+        })
+    })
+}
+
+controller.cancel = (req, res) => {
+    let id = req.params.id;
+    Event.findById(id, (err, event) => {
+        if(err) throw err;
+        event.status = "Cancelled";
+        event.save((err) => {
+            if(err) throw err;
+            let red_to = "/admin/event" + id ;
+            res.redirect(red_to);
+        })
+    })
+}
+
+controller.archives = (req, res) => {
+    let id = req.params.id;
+    console.log(id);
+    Event.findById(id, (err, event) => {
+        if(err) throw err;
+        console.log(event);
+        event.update({"status":"Archived"}, (err) => {
+            if(err) throw err;
+            let red_to = "/admin/event" + id ;
+            res.redirect(red_to);
+        })
+    })
+}
+
+controller.remove = (req, res) => {
+    let id = req.params.id;
+    console.log(id);
+    Event.remove({_id: id}, (err) => {
+        
+        res.redirect('/admin/events');
+    })
+}
+
+controller.changerole = (req, res) => {
+    var role = req.params.role;
+    var email = req.params.email;
+      console.log(email);
+    User.getUserByUsername(email, (err, user) => {
+        if(err) return err;
+        console.log(user);
+          if(user){
+            
+              user.update({"local.role":role}, (err, user) => {
+                if(err) return(err)
+                  res.redirect('/');
+              });
+             
+          }else{
+            res.send("user does not exist");
+        }
+    });
+}
+
+controller.userremove = (req, res) => {
+    let id = req.params.id;
+    console.log(id);
+    User.remove({_id: id}, (err) => {
+        
+        res.redirect('/admin/members');
+    })
+}
+
+
 module.exports = controller;
+

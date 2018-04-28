@@ -27,6 +27,7 @@
               <a href="/admin/create"><button id="" class="final-button">Create new event</button></a>
             </div>
             <% for(let i=0;i<events.length;i++) { %>
+              
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="panel panel-default">
                 <div class="panel-body" style="padding:0px!important;">
@@ -40,8 +41,9 @@
                       <strong>End:</strong> <%= events[i].end %></br>-->
                       <i class="text-muted">By <%= events[i].organiser %></i><br>
 
-                      <a href="/admin/event<%= events[i]._id %>" class="btn btn-info">View</a>
-                      <a href="/admin/event/delete<%= events[i].title %>" class="btn btn-danger">Delete</a>
+                      <a href="/admin/event<%= events[i]._id %>" class="btn btn-info">View</a>                      
+                      <a href="/admin/cancel_event<%= events[i]._id %>" class="btn btn-warning">Cancel</a>
+                      <a href="/admin/delete_event<%= events[i]._id %>" class="btn btn-danger">Delete</a>
                     </div>
                   </div>
 

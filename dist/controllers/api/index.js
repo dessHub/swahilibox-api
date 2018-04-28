@@ -7,9 +7,9 @@ var Ticket = require('../../models/ticket');
 var controller = {};
 
 controller.getEvents = function (req, res) {
-    Event.find({}, function (error, events) {
+    Event.find({ "status": "Active" }, function (error, events) {
         if (error) {
-            res.jsond({
+            res.json({
                 status: "Error",
                 message: error
             });
@@ -22,7 +22,7 @@ controller.getEvents = function (req, res) {
 controller.getPast = function (req, res) {
     Event.find({ "status": "Archived" }, function (error, events) {
         if (error) {
-            res.jsond({
+            res.json({
                 status: "Error",
                 message: error
             });
@@ -36,29 +36,44 @@ controller.rsvp = function (req, res) {
     var event_id = req.body.event_id;
     var email = req.body.email;
     var name = req.body.name;
-    var randomno = Math.random().toString();
+    var random1 = Math.floor(Math.random() * 1000) + 1;
+    var random2 = Math.floor(Math.random() * 1000) + 1;
+    var randomno = random1.toString() + random2.toString();
+    console.log(event_id);
 
-    Event.findById(event_id, function (err, event) {
+    Ticket.find({ "eventId": event_id, "email": email }, function (err, ticket) {
         if (err) throw err;
-        var ticket = new Ticket();
-        ticket.email = email;
-        ticket.name = name;
-        ticket.eventId = event_id;
-        ticket.title = event.title;
-        ticket.start = event.start;
-        ticket.end = event.end;
-        ticket.venue = event.venue;
-        ticket.organiser = event.organiser;
-        ticket.ticketNo = randomno;
-
-        ticket.save(function (err, ticket) {
-            if (err) throw err;
-
+        if (ticket.length != 0) {
             res.json({
-                status: "Success",
-                ticket: ticket
+                status: "Already",
+                message: "Email already has a ticket",
+                ticket: ticket.randomno
             });
-        });
+        } else {
+            Event.findById(event_id, function (err, event) {
+                if (err) throw err;
+                var ticket = new Ticket();
+                ticket.email = email;
+                ticket.name = name;
+                ticket.eventId = event_id;
+                ticket.title = event.title;
+                ticket.start = event.start;
+                ticket.end = event.end;
+                ticket.venue = event.venue;
+                ticket.organiser = event.organiser;
+                ticket.ticketNo = randomno;
+                ticket.banner = event.banner;
+
+                ticket.save(function (err, ticket) {
+                    if (err) throw err;
+
+                    res.json({
+                        status: "Success",
+                        ticket: randomno
+                    });
+                });
+            });
+        }
     });
 };
 

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <% include ../partials/head.ejs %>
+  </head>
+  <body >
+    <% include ../partials/nav.ejs %>
+    <div id="app">
+
+        <div class="top-events">
+            <h2>RSVP</h2>
+           </div>
+         
+           <div class="events">
+             <div class="container">
+              <div class="row">
+                <div class="col-md-5 col-xs-12">
+
+                    <div class="" style="border-style: ridge;background:#e8e9ea; padding-left: 20px; padding-right: 20px;padding-bottom: 10px;" >
+
+                        <h1 style="margin-bottom:20px;"><span class="fa fa-book"></span> GET A TICKET</h1>
+                    
+                        <!-- show any messages that come back with authentication -->
+                        <% if (message) { %>
+                            <div class="alert alert-success"><%= message %></div>
+                        <% } %>
+                    
+                        <!-- <div class="col-md-offset-1 col-md-10 col-md-offset-1 col-xs-offset-1 col-xs-10 col-xs-offset-1">-->
+                        <!-- LOGIN FORM -->
+                        <form action="/rsvp" method="post">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="text" class="form-control" name="email">
+                                <input type="hidden" class="form-control" value="<%= event._id %>" name="event_id">
+                            </div>
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" class="form-control" name="name">
+                            </div>
+                    
+                            <button type="submit" class="btn btn-warning btn-lg">SUBMIT</button>
+                        </form>
+                    
+                    </div>
+         
+                </div>
+                <div class="col-md-7 col-xs-12">
+
+                            <div class="event" style="margin: 5px; height:auto; border-style: ridge;background:#e8e9ea; padding-left: 20px; padding-right: 20px;">
+                               <div class="">
+                                
+                                  <div class="event-img">
+                                   <img class="img-responsive" src="<%= event.banner %>" style="height:30vh; width: auto;">
+                                  </div>
+                               
+                                <div class="">
+                                    
+                                 <div class="event-cont">
+                                  <h3><%= event.title %></h3>
+                                  <p><%= event.description %> </p> 
+                                  <div >
+                                    <h5>VENUE: <strong> <%= event.venue %></strong> </h5>
+                                    <h5>ORGANISED BY: <strong> <%= event.organiser %></strong> </h5>
+                                  </div> 
+                                  <div>        
+                                   <span>START: <strong><%= event.start %></strong></span>
+                                   <span> - </span>
+                                   <span>END: <strong><%= event.end %></strong></span>
+                                  </div>
+                                 </div>
+                                </div>
+                               </div>
+                            </div>
+                        </div>
+              </div>
+             </div>
+           </div>
+
+    </div>
+    <% include ../partials/footer.ejs %>
+  </body>
+</html>

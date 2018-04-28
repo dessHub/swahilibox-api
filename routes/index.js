@@ -22,8 +22,16 @@ app.get('/services', (req, res) => {
     controller.services(req, res);
 })
 
+app.get('/rsvp:id', (req, res) => {
+    controller.getrsvp(req, res);
+})
+
 app.post('/rsvp', (req, res) => {
     controller.rsvp(req, res);
+})
+
+app.get('/ticket:id/:email', (req, res) => {
+    controller.getticket(req, res);
 })
 
 
