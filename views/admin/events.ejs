@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
 <title>Swahilibox : Admin</title>
@@ -21,33 +21,37 @@
 
 
  <section id="main-content">
- 
-
         <section class="wrapper">
-            <a href="/admin/create"><button id="" class="final-button">Create new event</button></a>
           <div class="row">
+            <div class="col-md-12">
+              <a href="/admin/create"><button id="" class="final-button">Create new event</button></a>
+            </div>
             <% for(let i=0;i<events.length;i++) { %>
               
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-              <div class="info-box white-bg">
-                <div class="panel-body">
-                <div class="panel-heading"><%= events[i].title %></div>
-                <img src="<%= events[i].banner %>" class="img-rounded" width="150" height="200">
-                <div class="panel-content"><%= events[i].description %></br>
-                  <strong>Venue: <%= events[i].venue %>.</strong></br>
-                  <strong>Start:<%= events[i].start %></strong></br>
-                  <strong>End: <%= events[i].end %></strong></br>
-                  <strong>Organiser: <%= events[i].organiser %></strong>
+                <div class="panel panel-default">
+                <div class="panel-body" style="padding:0px!important;">
+                  <img class="img img-responsive" src="<%= events[i].banner %>" style="height: 250px;overflow: hidden;width:100%;">
+                  <div class="row" style="padding: 5px 15px 10px 15px;">
+                    <div class="col-md-12">
+                      <h2><%= events[i].title %></h2>
+                      <p class="text"><%= events[i].description %></p>
+                      At <%= events[i].venue %>.</br>
+                      <!--<strong>Start:</strong> <%= events[i].start %></br>
+                      <strong>End:</strong> <%= events[i].end %></br>-->
+                      <i class="text-muted">By <%= events[i].organiser %></i><br>
+
+                      <a href="/admin/event<%= events[i]._id %>" class="btn btn-info">View</a>                      
+                      <a href="/admin/cancel_event<%= events[i]._id %>" class="btn btn-warning">Cancel</a>
+                      <a href="/admin/delete_event<%= events[i]._id %>" class="btn btn-danger">Delete</a>
+                    </div>
+                  </div>
+
                 </div>
-                <a href="/admin/event<%= events[i]._id %>"><button class="btn btn-info">VIEW</button></a>
-                <a href="/admin/cancel_event<%= events[i]._id %>" ><button class="btn btn-warning">CANCEL</button></a>
-                <a href="/admin/delete_event<%= events[i]._id %>" ><button class="btn btn-danger">DELETE</button></a>
-                </div><!--/ .buttons -->             	
-              </div><!--/.info-box-->			
-            </div>
-            
-            <% } %>  
- 	
+                </div>
+                </div>
+            <% } %>
+
           </div><!--/.row-->
 
           <!-- The Modal -->
@@ -70,19 +74,19 @@
        <h5>ORGANIZERS<span class="required">*</span></h5>
       <input type="text" name="Event organizer" placeholder="we are organizing">
       <h5>ADD IMAGE</h5>
-        <input type="file" name="file" id="image_file" />   
-                                          <h3 align="center">Image Preview</h3>  
-                                          <div id="image_preview" style="display: none">  
-                                          </div>  
+        <input type="file" name="file" id="image_file" />
+                                          <h3 align="center">Image Preview</h3>
+                                          <div id="image_preview" style="display: none">
+                                          </div>
       <h5>DESCRIPTION<span class="required">*</span></h5>
       <textarea rows="4" cols="50"></textarea>
-      
+
     <div style="position: absolute; bottom: 0;right:0;"><a href="" class="final-button">SAVE</a></div>
     </div>
   </div>
 </div>
 
-                
+
 </section>
 <!--content-->
 

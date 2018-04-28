@@ -8,45 +8,44 @@
     <div id="app">
 
         <div class="top-events">
-            <h2>LOGIN</h2>
+            <!--<h2>LOGIN</h2>-->
            </div>
-         
-           <div class="events">
+
+           <div class="events" style="background-color:rgb(243, 243, 243);margin: 0px;padding-top: 10px;">
              <div class="container">
               <div class="row">
-                <div class="col-md-offset-2 col-md-6 col-xs-12">
-
-                    <div class="" style="border-style: ridge;background:#e8e9ea; padding-left: 20px; padding-right: 20px;" >
-
-                        <h1 style="margin-bottom:20px;"><span class="fa fa-user"></span> Login</h1>
-                    
-                        <!-- show any messages that come back with authentication -->
-                        <% if (message.length > 0) { %>
-                            <div class="alert alert-danger"><%= message %></div>
-                        <% } %>
-                    
-                        <!-- <div class="col-md-offset-1 col-md-10 col-md-offset-1 col-xs-offset-1 col-xs-10 col-xs-offset-1">-->
-                        <!-- LOGIN FORM -->
-                        <form action="/auth/front/login" method="post">
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="text" class="form-control" name="email">
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control" name="password">
-                            </div>
-                    
-                            <button type="submit" class="btn btn-warning btn-lg">Login</button>
-                        </form>
-                     <!--</div>-->
-                        <hr>
-                    
-                        <p>Need an account? <a href="/auth/front/signup">Signup</a></p>
-                        <p>Or go <a href="/">home</a>.</p>
-                    
+                <div class="col-md-offset-4 col-md-4 col-xs-12">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h3 style=""><span class="fa fa-unlock"></span> Login</h3>
                     </div>
-         
+                    <div class="panel-body">
+                      <div class="" >
+                          <!-- show any messages that come back with authentication -->
+                          <% if (message.length > 0) { %>
+                              <div class="alert alert-danger"><%= message %></div>
+                          <% } %>
+                          <!-- <div class="col-md-offset-1 col-md-10 col-md-offset-1 col-xs-offset-1 col-xs-10 col-xs-offset-1">-->
+                          <!-- LOGIN FORM -->
+                          <form action="/auth/front/login" method="post">
+                              <div class="form-group">
+                                  <label class="pull-left">Email</label>
+                                  <input type="text" class="form-control" name="email" placeholder="Your Email" required>
+                              </div>
+                              <div class="form-group">
+                                  <label class="pull-left">Password</label>
+                                  <input type="password" class="form-control" name="password" placeholder="Your Password" required>
+                              </div>
+                              <button type="submit" class="btn btn-warning btn-lg btn-block">Login</button>
+                          </form>
+                       <!--</div>-->
+                          <hr>
+                          <p>New here? <a href="/auth/front/signup">Create Account</a></p>
+                          <!--<p>Or go <a href="/">home</a>.</p>-->
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
              </div>

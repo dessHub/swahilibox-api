@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
 <title>Swahilibox : Admin</title>
@@ -19,40 +19,41 @@
  </aside>
 
  <section id="main-content">
-   <section class="wrapper">						
+   <section class="wrapper">
       <div class="row">
-          <div class="col-md-offset-2 col-md-7 col-sm-12 col-xs-12">
+          <div class="col-md-12 col-sm-12 col-xs-12">
          <div class="panel panel-default">
              <div class="panel-heading">
-                 <%= event.title %>
+                 <h3>
+                   <%= event.title %>
+                   <div class="btn-group pull-right">
+                        <a class="btn btn-warning dropdown-toggle" data-toggle="dropdown" href="" title="actions"> Action <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="/admin/publish_event<%= event._id %>"> Publish</a></li>
+                          <li><a href="/admin/edit_event<%= event._id %>"> Edit</a></li>
+                          <li><a href="/admin/event/remove<%= event._id %>"> Delete</a></li>
+                        </ul>
+                    </div>
+                 </h3>
              </div>
             <div class="panel panel-body">
-             <div class="event-banner">
-                 <img src="<%= event.banner %>" class="img-responsive">
-             </div>
-             <div class="">
-                 <% if( event.status == "Notactive") { %>
-                 <span><a href="/admin/publish_event<%= event._id %>"><button class="btn btn-success">PUBLISH</button></a></span>
-                 <% }else if(event.status == "Active") { %>
-                    <span><a href="/admin/archive_event<%= event._id %>"><button class="btn btn-success">ARCHIVE</button></a></span>
-                 <% } %>
-                 <span><a href="/admin/edit_event<%= event._id %>"><button class="btn btn-warning">EDIT</button></a></span>
-                 <span><a href="/admin/delete_event<%= event._id %>"><button class="btn btn-danger">DELETE</button></a></span>
-             </div>
-             <div class="">
-                 <div class="col-md-4">
-                     <h4>VENUE: <strong><%= event.venue %></strong></h4>
-                 </div>
-                 <div class="col-md-4">
-                     <h4>START: <strong><%= event.start %></strong></h4>
-                 </div>
-                 <div class="col-md-4">
-                     <h4>END: <strong><%= event.end %></strong></h4>
-                 </div>
-             </div>
-             <div class="">
-                 <p><%= event.description %></p>
-             </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="event-banner">
+                      <img src="<%= event.banner %>" class="img img-responsive" style="height: 250px;overflow: hidden;margin-left:auto;margin-right:auto;display:block;">
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <h4><strong>Venue: </strong><%= event.venue %></h4>
+                  <h4><strong>Start: </strong><%= event.start %></h4>
+                  <h4><strong>End: </strong><%= event.end %></h4>
+                  <h4><strong>Description: </strong><br>
+                    <%= event.description %>
+                  </h4>
+                </div>
+              </div>
+
             </div>
          </div>
         </div>
@@ -85,13 +86,13 @@
         </div>
       </div>
    </section>
-</section>		
+</section>
 
 <!--content-->
 
 <!-- javascripts -->
 <script>
-  
+
         </script>
 
 </body>

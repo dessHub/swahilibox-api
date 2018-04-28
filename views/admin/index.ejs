@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
 <title>Swahilibox : Admin</title>
@@ -19,75 +19,65 @@
  </aside>
 
  <section id="main-content">
-          <section class="wrapper">						
+          <section class="wrapper">
             <div class="row">
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<div class="info-box dark-bg">
-						<i class="fa fa-user"></i>
+
+					<div class="info-box" style="background-color:cadetblue;">
+						<i class="fa fa-group"></i>
 						<div class="count"><%= users %></div>
-						<div class="title">Members</div>						
-					</div><!--/.info-box-->			
+						<div class="title">Members</div>
+					</div><!--/.info-box-->
 				</div><!--/.col-->
-				
+
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<div class="info-box dark-bg">
+					<div class="info-box" style="background-color:darkseagreen;">
 						<i class="fa fa-calendar"></i>
+
 						<div class="count"><%= active %></div>
-						<div class="title">Upcoming Events</div>						
-					</div><!--/.info-box-->			
-				</div><!--/.col-->	
-				
+						<div class="title">Upcoming Events</div>
+					</div><!--/.info-box-->
+				</div><!--/.col-->
+
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<div class="info-box dark-bg">
-						<i class="fa fa-list-alt"></i>
+					<div class="info-box" style="background-color:khaki;">
+						<i class="fa fa-archive"></i>
 						<div class="count"><%= past %></div>
-						<div class="title">Past Events</div>						
-					</div><!--/.info-box-->			
-			     </div><!--/.col-->			
+						<div class="title">Past Events</div>
+					</div><!--/.info-box-->
+			     </div><!--/.col-->
+
 			</div><!--/.row-->
 
-                  <div class="row">
-		    <div class="col-lg-9 col-md-12">
-				<div class="panel panel-default">
-				<div class="panel panel-body">
-               <table class="table">
-                              <thead>
-                              <tr>
-                                  <th>ID</th>
-                                  <th>First Name</th>
-                                  <th>Last Name</th>
-                                  <th>Email</th>
-                              </tr>
-                              </thead>
-                              <tbody>
-                              <tr>
-                                  <td>1</td>
-                                  <td>Susan</td>
-                                  <td>Were</td>
-                                  <td>susanwere15@gmail.com</td>
-                              </tr>
-                              <tr>
-                                  <td>2</td>
-                                  <td>Katherine</td>
-                                  <td>Kimetto</td>
-                                  <td>kathiekim95@gmail.com</td>
-                              </tr>
-                              <tr>
-                                  <td>3</td>
-                                  <td>John</td>
-                                  <td>Doe</td>
-                                  <td>johndoe@gmail.com</td>
-                              </tr>
-                              </tbody>
-                          </table>
+      <div class="row">
+        <% for(let i=0;i<events.length;i++) { %>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+            <div class="panel-body" style="padding:0px!important;">
+              <img class="img img-responsive" src="<%= events[i].banner %>" style="height: 250px;overflow: hidden;width:100%;">
+              <div class="row" style="padding: 5px 15px 10px 15px;">
+                <div class="col-md-12">
+                  <h2><%= events[i].title %></h2>
+                  <p class="text"><%= events[i].description %></p>
+                  At <%= events[i].venue %>.</br>
+                  <!--<strong>Start:</strong> <%= events[i].start %></br>
+                  <strong>End:</strong> <%= events[i].end %></br>-->
+                  <i class="text-muted">By <%= events[i].organiser %></i><br>
 
-	
-			</div>
-		</div>
+                  <a href="/admin/event<%= events[i]._id %>" class="btn btn-info">View</a>
+                  <a href="/admin/event/delete<%= events[i].title %>" class="btn btn-danger">Delete</a>
+                </div>
               </div>
-           </div>
+
+            </div>
+            </div>
+            </div>
+        <% } %>
+
+      </div><!--/.row-->
+
  </section>
-</section>		
+</section>
 
 <!--content-->
 
