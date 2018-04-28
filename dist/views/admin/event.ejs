@@ -29,8 +29,15 @@
                    <div class="btn-group pull-right">
                         <a class="btn btn-warning dropdown-toggle" data-toggle="dropdown" href="" title="actions"> Action <span class="caret"></span></a>
                         <ul class="dropdown-menu">
+                          <% if(event.status != "Archived") { %>
+                          <% if(event.status == "Notactive" || event.status == "Cancelled") { %>
                           <li><a href="/admin/publish_event<%= event._id %>"> Publish</a></li>
+                          <% } %>
+                          <% if(event.status != "Cancelled") { %>
+                          <li><a href="/admin/cancel_event<%= event._id %>"> Cancel</a></li>
+                          <% } %>
                           <li><a href="/admin/edit_event<%= event._id %>"> Edit</a></li>
+                          <% } %>
                           <li><a href="/admin/event/remove<%= event._id %>"> Delete</a></li>
                         </ul>
                     </div>

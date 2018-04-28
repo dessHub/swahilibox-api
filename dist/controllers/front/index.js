@@ -4,15 +4,18 @@ var Event = require('../../models/event');
 var User = require('../../models/user');
 var Ticket = require('../../models/ticket');
 var nodemailer = require('nodemailer');
-var path = require('path'),
-    templatesDir = path.join(__dirname, 'views');
+var ejs = require('ejs');
+var path = require('path');
+var templatesDir = path.join(__dirname, '../../views/emails/');
+var Email = require('email-templates');
 
-var emailTemplates = require('email-templates');
 var transport = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, // true for 465, false for other ports
     auth: {
-        user: 'desshub95@gmail.com',
-        pass: 'm@st3rm1nd.'
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
     }
 });
 
@@ -92,82 +95,51 @@ controller.rsvp = function (req, res) {
 };
 
 controller.getticket = function (req, res) {
-    var email = req.params.email;
+    var useremail = req.params.email;
     var event_id = req.params.id;
 
-    Ticket.findOne({ "eventId": event_id, "email": email }, function (err, ticket) {
+    Ticket.findOne({ "eventId": event_id, "email": useremail }, function (err, ticket) {
         if (err) throw err;
         Event.findById(event_id, function (err, event) {
             if (err) throw err;
 
-            /*emailTemplates(templatesDir, function(err, template) {
-                 if (err) {
-                  console.log(err);
-                } else {
-              
-                var locals = ticket;
-              
-                  // Send a single email
-                  template('emails/ticket', locals, function(err, html, text) {
-                    if (err) {
-                      console.log(err);
-                    } else {
-                      transport.sendMail({
-                        from: 'Swahilibox <no-reply@swahilibox.com>',
-                        to: locals.email,
-                        subject: 'TICKET BOOKING',
-                        html: html,
-                        text: text
-                      }, function(err, responseStatus) {
-                        if (err) {
-                          console.log(err);
+            nodemailer.createTestAccount(function (err, account) {
+
+                var html = ejs.renderFile(templatesDir + "tickets/html.ejs", { ticket: ticket, event: event });
+                var promise1 = Promise.resolve(html);
+                var htmlvalue = "";
+                promise1.then(function (value) {
+
+                    htmlvalue = ejs.render(value);
+                    console.log(htmlvalue);
+                    // setup email data with unicode symbols
+                    var mailOptions = {
+                        from: '"Swahilibox 👻" <nonreply@swahilibox.com>', // sender address
+                        to: ticket.email, // list of receivers
+                        subject: 'Ticket Booking', // Subject line]
+                        html: htmlvalue
+                    };
+
+                    // send mail with defined transport object
+                    transport.sendMail(mailOptions, function (error, info) {
+                        if (error) {
+                            console.log('Message not sent');
+                            console.log(error);
+                            return false;
                         } else {
-                          console.log(responseStatus.message);
-                        }
-                      });
-                    }
-                  });
-                }
-              }); */
+                            console.log('Message sent: ' + info.response);
+                            console.log(info);
+                            return true;
+                        };
+                    });
+                });
+            });
 
             res.render('front/ticket', { ticket: ticket, event: event });
         });
     });
 };
 
-/*nodemailer.createTestAccount((err, account) => {
-    // create reusable transporter object using the default SMTP transport
-    let transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
-        port: 587,
-        secure: false, // true for 465, false for other ports
-        auth: {
-            user: account.user, // generated ethereal user
-            pass: account.pass // generated ethereal password
-        }
-    });
-
-    // setup email data with unicode symbols
-    let mailOptions = {
-        from: '"Fred Foo 👻" <foo@example.com>', // sender address
-        to: 'bar@example.com, baz@example.com', // list of receivers
-        subject: 'Hello ✔', // Subject line
-        text: 'Hello world?', // plain text body
-        html: '<b>Hello world?</b>' // html body
-    };
-
-    // send mail with defined transport object
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            return console.log(error);
-        }
-        console.log('Message sent: %s', info.messageId);
-        // Preview only available when sending through an Ethereal account
-        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-
-        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-        // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-    });
-});*/
+/**/
 
 module.exports = controller;

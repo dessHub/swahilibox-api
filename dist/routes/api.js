@@ -17,4 +17,8 @@ app.post('/rsvp', function (req, res) {
     controller.rsvp(req, res);
 });
 
+app.get('/ticket:id/:email', function (req, res) {
+    controller.getticket(req, res);
+});
+
 module.exports = app;

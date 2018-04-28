@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ticket</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container" style="padding-left:40px"><br />
+      <h1 style="color:goldenrod">SWAHILIBOX</h1>
+      <div class="jumbotron">
+        <h2>Hi <%= ticket.name %>,</h2>
+        <h3> This is your order confirmation of <a href="https://meetbox.herokuapp.com/rspv<%= event._id %>"><%= ticket.title %></a></h2>
+      
+      <h3>TICKET NO: <strong> <%= ticket.ticketNo %></strong> </h3>
+       <p>DATE: <strong> <%= ticket.start %></strong></p>
+      </div>
+    </div>
+  </body>
+</html>

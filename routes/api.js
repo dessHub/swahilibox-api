@@ -15,4 +15,8 @@ app.post('/rsvp', (req, res) => {
     controller.rsvp(req, res);
 })
 
+app.get('/ticket:id/:email', (req, res) => {
+    controller.getticket(req, res);
+})
+
 module.exports = app;
