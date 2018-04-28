@@ -11,11 +11,15 @@ controller.index = (req, res) => {
 
         Event.count({"status":"Archived"}, (err, past) => {
             if(err) throw err;
-    
-            User.count({}, (err, users) => {
+            
+            Event.find({"status":"Active"}, (err, events) => {
                 if(err) throw err;
 
-                res.render('admin/index', {past: past,active:active,users:users}); 
+                User.count({}, (err, users) => {
+                    if(err) throw err;
+    
+                    res.render('admin/index', {past: past,active:active,users:users,events:events}); 
+                })   
             })
         })  
     })

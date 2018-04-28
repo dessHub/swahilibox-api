@@ -22,27 +22,26 @@
           <section class="wrapper">
             <div class="row">
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<div class="info-box dark-bg">
-						<i class="fa fa-user"></i>
 
-						<div class="count">%= users %></div>
-						<div class="title">>Members</div>
+					<div class="info-box" style="background-color:cadetblue;">
+						<i class="fa fa-group"></i>
+						<div class="count"><%= users %></div>
+						<div class="title">Members</div>
 					</div><!--/.info-box-->
-
 				</div><!--/.col-->
 
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<div class="info-box dark-bg">
+					<div class="info-box" style="background-color:darkseagreen;">
 						<i class="fa fa-calendar"></i>
 
-						<div class="count">%= active %></div>
+						<div class="count"><%= active %></div>
 						<div class="title">Upcoming Events</div>
 					</div><!--/.info-box-->
 				</div><!--/.col-->
 
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<div class="info-box dark-bg">
-						<i class="fa fa-list-alt"></i>
+					<div class="info-box" style="background-color:khaki;">
+						<i class="fa fa-archive"></i>
 						<div class="count"><%= past %></div>
 						<div class="title">Past Events</div>
 					</div><!--/.info-box-->
@@ -51,9 +50,6 @@
 			</div><!--/.row-->
 
       <div class="row">
-        <div class="col-md-12">
-          <a href="/admin/create"><button id="" class="final-button">Create new event</button></a>
-        </div>
         <% for(let i=0;i<events.length;i++) { %>
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
             <div class="panel panel-default">

@@ -41,15 +41,15 @@
                       <strong>End:</strong> <%= events[i].end %></br>-->
                       <i class="text-muted">By <%= events[i].organiser %></i><br>
 
-                      <a href="/admin/event<%= events[i]._id %>" class="btn btn-info">View</a>
-                      <a href="/admin/event/delete<%= events[i].title %>" class="btn btn-danger">Delete</a>
+                      <a href="/admin/event<%= events[i]._id %>" class="btn btn-info">View</a>                      
+                      <a href="/admin/cancel_event<%= events[i]._id %>" class="btn btn-warning">Cancel</a>
+                      <a href="/admin/delete_event<%= events[i]._id %>" class="btn btn-danger">Delete</a>
                     </div>
                   </div>
 
                 </div>
                 </div>
                 </div>
-
             <% } %>
 
           </div><!--/.row-->

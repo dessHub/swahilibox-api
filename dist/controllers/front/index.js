@@ -100,36 +100,35 @@ controller.getticket = function (req, res) {
         Event.findById(event_id, function (err, event) {
             if (err) throw err;
 
-            emailTemplates(templatesDir, function (err, template) {
-
-                if (err) {
-                    console.log(err);
+            /*emailTemplates(templatesDir, function(err, template) {
+                 if (err) {
+                  console.log(err);
                 } else {
-
-                    var locals = ticket;
-
-                    // Send a single email
-                    template('emails/ticket', locals, function (err, html, text) {
+              
+                var locals = ticket;
+              
+                  // Send a single email
+                  template('emails/ticket', locals, function(err, html, text) {
+                    if (err) {
+                      console.log(err);
+                    } else {
+                      transport.sendMail({
+                        from: 'Swahilibox <no-reply@swahilibox.com>',
+                        to: locals.email,
+                        subject: 'TICKET BOOKING',
+                        html: html,
+                        text: text
+                      }, function(err, responseStatus) {
                         if (err) {
-                            console.log(err);
+                          console.log(err);
                         } else {
-                            transport.sendMail({
-                                from: 'Swahilibox <no-reply@swahilibox.com>',
-                                to: locals.email,
-                                subject: 'TICKET BOOKING',
-                                html: html,
-                                text: text
-                            }, function (err, responseStatus) {
-                                if (err) {
-                                    console.log(err);
-                                } else {
-                                    console.log(responseStatus.message);
-                                }
-                            });
+                          console.log(responseStatus.message);
                         }
-                    });
+                      });
+                    }
+                  });
                 }
-            });
+              }); */
 
             res.render('front/ticket', { ticket: ticket, event: event });
         });

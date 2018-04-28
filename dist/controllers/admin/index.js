@@ -14,10 +14,14 @@ controller.index = function (req, res) {
         Event.count({ "status": "Archived" }, function (err, past) {
             if (err) throw err;
 
-            User.count({}, function (err, users) {
+            Event.find({ "status": "Active" }, function (err, events) {
                 if (err) throw err;
 
-                res.render('admin/index', { past: past, active: active, users: users });
+                User.count({}, function (err, users) {
+                    if (err) throw err;
+
+                    res.render('admin/index', { past: past, active: active, users: users, events: events });
+                });
             });
         });
     });
