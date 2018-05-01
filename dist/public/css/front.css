@@ -179,6 +179,7 @@
 
   .team-img {
     height : 200px;
+    width: auto;
    }
    .team-exec {
     margin-bottom : 20px;
