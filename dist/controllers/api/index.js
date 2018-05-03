@@ -24,7 +24,7 @@ var controller = {};
 controller.getEvents = function (req, res) {
     Event.find({ "status": "Active" }, function (error, events) {
         if (error) {
-            res.json({
+            res.status(200).json({
                 status: "Error",
                 message: error
             });
@@ -42,7 +42,7 @@ controller.getPast = function (req, res) {
                 message: error
             });
         } else {
-            res.json(events);
+            res.status(200).json(events);
         }
     });
 };

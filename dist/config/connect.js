@@ -22,10 +22,16 @@ _mongoose2.default.Promise = global.Promise;
 
 var connectToDb = function connectToDb() {
     var dbHost = process.env.MONGODB_URI;
+    var testDb = process.env.TEST_MONGODB_URI;
 
     try {
-        _mongoose2.default.connect('mongodb://' + dbHost);
-        console.log('Connected to mongo!!!');
+        if (process.env.NODE_ENV == "test") {
+            _mongoose2.default.connect('mongodb://' + testDb);
+            console.log('Connected to test db!!!');
+        } else {
+            _mongoose2.default.connect('mongodb://' + dbHost);
+            console.log('Connected to mongo!!!');
+        }
     } catch (err) {
         console.log('Could not connect to MongoDB');
     }

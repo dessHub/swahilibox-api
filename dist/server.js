@@ -83,3 +83,5 @@ app.use('/admin', admin);
 app.listen(process.env.PORT || 3000, function () {
     console.log('starter listening on port 3000');
 });
+
+module.exports = app;

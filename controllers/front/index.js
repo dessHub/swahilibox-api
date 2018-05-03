@@ -20,7 +20,7 @@ let transport = nodemailer.createTransport({
 let controller = {};
 
 controller.index = (req, res) => {
-    res.render('front/index');
+    res.status(200).render('front/index');
 }
 
 controller.team = (req, res) => {

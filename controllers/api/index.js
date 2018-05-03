@@ -22,7 +22,7 @@ let controller = {};
 controller.getEvents = (req, res) => {
     Event.find({"status":"Active"}, (error, events) => {
         if(error){
-            res.json({
+            res.status(200).json({
                 status: "Error",
                 message: error
             });
@@ -40,7 +40,7 @@ controller.getPast = (req, res) => {
                 message: error
             });
         }else{
-        res.json(events);
+        res.status(200).json(events);
         }
       });
 }
